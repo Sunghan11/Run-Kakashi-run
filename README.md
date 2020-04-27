@@ -12,7 +12,7 @@ Users will be able to:
 
 * Start a game where-in a randomized environment will be setup.
 * Be able to select the background theme they would like to run in.
-* Collect currency to unlock different skins/characters.
+* Milestones to unlock different skins/characters.
 
 ## 3. Wireframes
 
@@ -26,6 +26,7 @@ https://wireframe.cc/UlmhxU
 * Canvas
 * webpack
 
-## 5. Implementation Timeline
+## 5. Bonus Features
 
-## 6. Bonus Features
+* Create character powerups that allow timed ability (ex/ shooting projectiles).
+* Create more characters that have different abilities. (ex/ jump multiple times)
