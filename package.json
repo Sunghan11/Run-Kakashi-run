@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "start": "webpack-dev-server --config webpack.dev.js",
-      "webpack:watch": "webpack --watch --config webpack.dev.js",
-      "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "webpack:watch": "webpack --watch --config webpack.dev.js",
+    "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize",
+    "run": "serve ./"
   },
   "author": "",
   "license": "ISC",
@@ -30,11 +31,13 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
   },
-
-"browserslist": [
-  "last 1 version",
-  "> 1%",
-  "maintained node versions",
-  "not dead"
-  ]
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "dependencies": {
+    "serve": "^11.3.0"
+  }
 }
