@@ -1,62 +1,89 @@
-// MIXINS && VARIABLES
-
-@mixin basic-box-shadow($color) {
-  box-shadow: 3px 3px 5px 5px $color, 1px 0px 1px $color;
-}
-
-$main-color: blue;
-$accent-color: darken($main-color, 10%);
-$background-color: lighten($main-color, 40%);
-
-// LAYOUT
-
-body {
-  background-color: $background-color;
-  color: $main-color;
-  height: 97vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
-
-.center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// COMPONENTS
-.card {
-  background: white;
-  height: 50vh;
-  width: 50vw;
-  border-radius: 15px;
-  margin-top: 15px;
-  @include basic-box-shadow($accent-color);
+.game-main {
+  position: relative;
+  width: vw;
+  margin: auto;
 }
 
 
-
-// TYPOGRAPHY
-h2 {
-  font-size: 3rem;
+.game-display {
+  height: 300px;
+  width: 800px;
+  position: relative;
+  display: inline-block;
+  margin: auto;
 }
 
 #canvas {
-    position: relative;
+  background: transparent;
+  border: 2px solid orange;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
-#kakashi-actions {
-    position: absolute;
-    bottom: 10px;
-    z-index: 10;
+#bg-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
 }
 
-#background-canvas {
-    position: relative;
+#tree-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
 }
 
-#kakashi-canvas {
-    position: absolute;
-    z-index: 10;
+#grass-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
 }
+
+#play-button {
+  position: relative;
+  top: 70px;
+  left: 50px;
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
+
+#play-button:hover {
+  color: orange;
+}
+
+
+
+.menu {
+  position: relative;
+  width: 750;
+  top: 5;
+  left: 5;
+  z-index: 15;
+  background:white;
+  text-align: center;
+  display: block;
+
+}
+
+
+span {
+  font-family: 'Sigmar One', cursive;
+  font-size: 35px;
+  margin-top: 20px;
+  color: orange;
+  text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4); 
+}
+
+
+.close {
+  display: none;
+}
+
+.toggled {
+  text-decoration: line-through;
+}
+

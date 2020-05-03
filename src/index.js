@@ -19,16 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // imgCard.classList.add("card", "center", "image-card");
     // document.body.appendChild(imgCard);
 
+    const gameCanvas = document.getElementById('canvas');
+    const canvasContext = gameCanvas.getContext('2d');
 
-    const canvas = document.getElementById('game-kakashi');
-    const canvasCtx = canvas.getContext('2d');
-
-    const bgCanvas = document.getElementById('game-background');
+    const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
-    // const game = new RunKakashiRun(canvas);
-    const game = new RunKakashiRun(canvasCtx, canvas, bgCtx)
 
-    game.openMenu();
-    
+    const treeCanvas = document.getElementById('tree-canvas');
+    const treeCtx = treeCanvas.getContext('2d');
+
+    const grassCanvas = document.getElementById('grass-canvas');
+    const grassCtx = grassCanvas.getContext('2d');
+
+    const game = new RunKakashiRun(canvasContext, gameCanvas, bgCtx, treeCtx, grassCtx
+    );
 
 });

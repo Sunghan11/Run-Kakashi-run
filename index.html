@@ -1,239 +1,44 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    <title>Run Kakashi Run</title>
-
-</head>
-
-<body>
-    <script src="./dist/main.js"></script>
-</body>
-
-</html> -->
+</html>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
     <title>Run Kakashi Run</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./src/styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="./src/styles/index.scss" />
     <script type="text/javascript" src="./dist/main.js"></script>
-
 </head>
 
 <body>
-    <h1>TEST</h1>
-    <div class="game">
-        <!-- <canvas id="game-kakashi" height="300" width="800"></canvas> -->
-        <!-- <canvas id="game-background" height ="300" width="800"></canvas> -->
-        <canvas id="kakashi-canvas" height="300" width="600"></canvas>
-        <canvas id="background-canvas" height="300" width="1100"></canvas>
-        <canvas id="canvas"></canvas> 
-        <button onClick="actionRun()">Run</button>
-        <button onClick="actionJump()">Jump</button>
-        <button onClick="actionPose()">Pose</button>
+    <header class="main-header group">
 
-        <button id="start-game">Play</button>
-    </div>
-    <script>
+    </header>
+    <main>
 
-        var bgCanvas = document.getElementById('background-canvas');
-        var bgCtx = bgCanvas.getContext('2d'),
-        // canvasTemp = document.createElement("game-kakashi"),
-        bgImage = new Image(),
-        // tempContext = canvasTemp.getContext('2d'),
-            imageWidth = 0,
-            imageHeight = 0,
-            imageDate = {},
-            canvasWidth = 1360,
-            canvasHeight = 300,
-            scrollValue = 0,
-            speed = 2;
-            
-            bgImage.src = "./images/background.jpg";
-            bgImage.onload = loadImage;
+        <div class="game-main">
+            <div class="game-display">
+                <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
+                <canvas id="bg-canvas" height="302" width="802"></canvas>
+                <canvas id="tree-canvas" height="302" width="802"></canvas>
+                <canvas id="grass-canvas" height="302" width="802"></canvas>
 
+                <div class="menu">
+                    <span>Run Kakashi Run</span>
+                    <div class="kakashi"></div>
 
-            function loadImage() {
-                imageWidth = bgImage.width;
-                imageHeight = bgImage.height;
-                canvasTemp.width = imageWidth;
-                canvasHeight = imageHeight;
-                render();
-            }
-
-            function render() {
-                bgCtx.clearRect(0,0,canvasWidth, canvasHeight);
-
-                if (scrollValue >= canvasWidth) {
-                    scrollValue = 0;
-                }
-                scrollValue += speed;
-                // bgCtx.drawImage(bgImage, canvasWidth - scrollValue, 0, scrollValue, imageHeight, 0, 0, scrollValue, imageHeight);
-                // bgCtx.drawImage(bgImage, scrollValue, 0, imageWidth, imageHeight);
-                bgCtx.drawImage(bgImage, - scrollValue, 0, imageWidth, imageHeight);
-                bgCtx.drawImage(bgImage, canvasWidth - scrollValue, 0, imageWidth, imageHeight);
-                setTimeout(function() {
-                    render();
-                },10
-                )
-            }
-
-        
-            // function init() {
-            //     var backgroundCanvas = document.getElementById('canvas');
-            //     var c = backgroundCanvas.getContext('2d');
-
-            //     var img = document.getElementsByName('img')[0];
-            //a e    var velocitya e= 100;
-            //a e    var distance a=e 0;
-            //     var lastFrameageepaintTime = 0;;
-            canvasHeight = imageHeight;
-            render();
-
-
-            //     function calcOffset(time) {
-            //         var frameGapTime = time - lastFrameRepaintTime;
-            //         lastFrameRepaintTime = time;
-            //         var translateX = velocity * (frameGapTime / 1000);
-            //         return translateX;
-            //     }
-
-
-            //     function draw(time) {
-            //         distance += calcOffset(time);
-            //         if (distance > img.width) { distance = 0; }
-            //         c.clearRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
-            //         c.save();
-            //         c.translate(distance, 0);
-            //         c.drawImage(img, 0, 0);
-            //         c.drawImage(img, -img.width + 1, 0);
-
-            //         requestAnimationFrame(draw);
-
-            //         c.restore();
-            //     }
-
-            //     function start() {
-            //         lastFrameRepaintTime = window.performance.now();
-            //         requestAnimationFrame(draw);
-            //     }
-            //     start();
-
-            // }
-            // window.addEventListener('load', init, false);
-    </script>
-    <div id="kakashi-actions">
-        <script id=kakashi-running>
-
-        var canWidth = 1200;
-        var canHeight = 300;
-
-        var x = 100;
-        var y = 230;
-
-        var trackRun = 0;
-        var trackJump1 = 1;
-        var trackJump2 = 2;
-        var trackPose = 3;
-
-        var srcX;
-        var srcY;
-
-        var sheetWidth = 330;
-        var sheetHeight = 220;
-
-        var cols = 6;
-        var rows = 4;
-
-
-        var width = sheetWidth / cols;
-        var height = sheetHeight / rows;
-
-        var run = true;
-        var jump = false;
-        var pose = false;
-        
-        function actionRun() {
-            jump = false;
-            pose = false;
-            run = true;
-        }
-
-        function actionJump() {
-            jump = true;
-            pose = false;
-            run = false;
-        }
-
-        function actionPose() {
-            pose = true;
-            run = false;
-            jump = false;
-
-        }
-
-
-        var currentFrame = 0;
-        function updateFrame() {
-            currentFrame = ++currentFrame % cols;
-            srcX = currentFrame * width;
-            if(run) {
-                srcY = trackRun * height;
-            } else if (jump) {
-                srcY = trackJump1 * height;
-                srcY = trackJump2 * height;
-                // var y = 0;
-                //         let interval2 = setInterval(function() {
-                //             y++; 
-                //             kakashi.style.top = 50 - (-0.1 * y * (y-50)) + 'px';
-        
-                //             if (y >= 50) clearInterval(interval2);
-                //         }, 20);
-            } else if (pose) {
-                srcY = trackPose * height;
-            }
-            ctx.clearRect(x,y,width,height);
-        }
-        var kakashi = new Image();
-        kakashi.src = "./images/kakashi2.png";
-
-        var canvas = document.getElementById('kakashi-canvas');
-        canvas.width = canWidth;
-        canvas.height = canHeight;
-        var ctx = canvas.getContext('2d');
-        
-        function drawImage() {
-            updateFrame();
-            ctx.drawImage(kakashi, srcX, srcY, width, height, x, y, width, height);
-
-        }
-
-        setInterval(function() {
-            drawImage();
-        }, 150
-        )
-
-
-
-
-    </script>
-    </div>
-    <!-- <div id="preload">
-        <img src="images/background.png">
-        <img src="images/kakashi.png">
-    </div>
-    <script src="game.js"></script>
-    <script src="kakashi.js"></script>
-    <script src="background.js"></script> -->
+                    <nav class="gameplay-nav group">
+                        <button id="play-button">Play</button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

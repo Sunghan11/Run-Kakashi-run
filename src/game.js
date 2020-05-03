@@ -1,69 +1,78 @@
-import Kakashi from "./kakashi";
-import Background from "./background";
+import Kakashi from './kakashi';
+import Background from './background';
+import Score from './score';
+import { Menu } from './menu';
 
-export default class RunKakashiRun {
-    constructor(canvasCtx, canvas, bgCtx) {
-        // document.getElementById('game-kakashi').focus();
-        this.ctx = canvasCtx;
-        this.canvas = canvas;
-        // this.dimensions = { width: canvas.width, height: canvas.height};
-        // this.registerEvents();
-        this.kakashi = new Kakashi([100, 210]);
-        // this.restart();
-        this.loadBackground(bgCtx);
-        // this.gamePlaying = true;
-        // this.gameOver = false;
-        // this.kakashi.position [100,210]
-        this.restart = this.restart.bind(this);
-        this.draw = this.draw.bind(this);
+
+class RunKakashiRun {
+    constructor(ctx, gameCanvas, bgCtx, treeCtx, grassCtx) {
+        this.ctx = ctx;
+        this.gameCanvas = gameCanvas;
+        this.kakashi = new Kakashi({ position: [100, 220] });
+        this.obstacles = [];
+        this.score = new Score(1);
+        this.muteMusic = false;
+
         this.jump = this.jump.bind(this);
+        this.draw = this.draw.bind(this);
+        this.createBackground(bgCtx, treeCtx, grassCtx);
+        this.setButtonListeners();
+        // this.restart = this.restart.bind(this);
 
+        Menu.menuButtons(this);
     }
 
-    restart() {
-        this.running = false;
-        this.kakashi = new Kakashi(this.dimensions);
-        this.start();
-        // this.background = new Ba
+    jump(event) {
+        if ((event.code === 'Space' || event.code === 'KeyW' || event.code === 'ArrowUp') && this.gamePlaying) {
+            event.preventDefault();
+            this.kakashi.toggleJump();
+        }
     }
+
 
     setButtonListeners() {
-        this.canvas.addEventListener('keydown', this.jump);
-        this.canvas.addEventListener('keydown', this.restart);
+        this.gameCanvas.addEventListener('keydown', this.jump);
+        this.gameCanvas.addEventListener('keydown', this.restart);
+        this.gameCanvas.addEventListener('keydown', e => {
+            if (e.code === 'Escape' && this.gamePlaying) {
+                e.preventDefault();
+            }
+        })
     }
 
-    loadBackground(bgCtx) {
-        const backgroundImage = new Image();
-        backgroundImage.src = '../images/background.png';
-        this.background = new Background(bgCtx, backgroundImage, .8, 800, -35)
+    createBackground(bgCtx, treeCtx, grassCtx) {
+        const bgImage = new Image();
+        bgImage.src = '../images/backgroundWater.jpg';
+        this.bg = new Background(bgCtx, bgImage, -35, 1360, 1);
+
+        const treeImage = new Image();
+        treeImage.src = '../images/darkTrees.png';
+        this.tree = new Background(treeCtx, treeImage, 115, 400, 3);
+
+        const grassImage = new Image();
+        grassImage.src = '../images/grass.png';
+        this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
     }
 
     start() {
-        document.getElementById('game-kakashi').focus();
-        this.kakashi.position = [100,210];
+        document.getElementById('canvas').focus();
+        this.gamePlaying = true;
+        this.gameOver = false;
+        this.score.score = 0;
+        this.kakashi.position = [100, 220];
         this.draw();
-    }
-
-    openMenu() {
-        this.score.setScore();
-    }
-
-    jump(e) {
-        if(e.code === 'Space' && this.gamePlaying) {
-            e.preventDefault();
-            if (!this.gameOver)
-            this.player.toggleJump();
-        }
     }
 
     draw() {
         if (!this.gameOver) {
             requestAnimationFrame(this.draw);
-            this.kakashi.animate(this.ctx);
-            this.background.drawBackground();
+            this.kakashi.update(this.ctx);
+            this.score.drawScore(this.ctx);
+            this.bg.draw();
+            this.tree.draw();
+            this.grass.draw();
         }
     }
-
-
-
 }
+
+export default RunKakashiRun;

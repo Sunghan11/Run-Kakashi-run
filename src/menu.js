@@ -1,17 +1,17 @@
 const closeMenu = () => {
-    const menu = document.getElementById('menu');
+    const menu = document.getElementsByClassName('menu')[0];
     menu.className = 'menu close';
-}
-export default class Menu = {
-    
-    menuButtons(game) {
-        const startButton = document.getElementById('start-button');
+};
 
+export const Menu = {
+    menuButtons(RunKakashiRun) {
+        const play = document.getElementById('play-button');
 
-
-        startButton.addEventListener('click', e => {
+        play.addEventListener('click', e => {
             closeMenu();
-            setTimeout(() => game.start('start'), 150);
-        });
-    }
-}
+
+            setTimeout(() => RunKakashiRun.start('play'), 200);
+        }
+        );
+    },
+};
