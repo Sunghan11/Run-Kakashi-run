@@ -14,6 +14,7 @@ class RunKakashiRun {
         this.muteMusic = false;
 
         this.jump = this.jump.bind(this);
+        this.slide = this.slide.bind(this);
         this.draw = this.draw.bind(this);
         this.createBackground(bgCtx, treeCtx, grassCtx);
         this.setButtonListeners();
@@ -22,6 +23,8 @@ class RunKakashiRun {
         Menu.menuButtons(this);
     }
 
+
+
     jump(event) {
         if ((event.code === 'Space' || event.code === 'KeyW' || event.code === 'ArrowUp') && this.gamePlaying) {
             event.preventDefault();
@@ -29,9 +32,17 @@ class RunKakashiRun {
         }
     }
 
+    slide(event) {
+        if ((event.code === 'ControlLeft' || event.code === 'KeyS' || event.code === 'ArrowDown') && this.gamePlaying) {
+            event.preventDefault();
+            this.kakashi.toggleSlide();
+        }
+    }
+
 
     setButtonListeners() {
         this.gameCanvas.addEventListener('keydown', this.jump);
+        this.gameCanvas.addEventListener('keydown', this.slide);
         this.gameCanvas.addEventListener('keydown', this.restart);
         this.gameCanvas.addEventListener('keydown', e => {
             if (e.code === 'Escape' && this.gamePlaying) {
@@ -43,7 +54,7 @@ class RunKakashiRun {
     createBackground(bgCtx, treeCtx, grassCtx) {
         const bgImage = new Image();
         bgImage.src = '../images/backgroundWater.jpg';
-        this.bg = new Background(bgCtx, bgImage, -35, 1360, 1);
+        this.bg = new Background(bgCtx, bgImage, -35, 1400, 1);
 
         const treeImage = new Image();
         treeImage.src = '../images/darkTrees.png';
@@ -52,6 +63,20 @@ class RunKakashiRun {
         const grassImage = new Image();
         grassImage.src = '../images/grass.png';
         this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
+
+
+    }
+
+    restart() {
+        this.gamePlaying = false;
+        this.score = 0;
+        this.kakashi = new Kakashi()
+    }
+
+    gameOver() {
+        return (
+            this.gameCanvas.collidesWith(this.kakashi.bounds())
+        )
     }
 
     start() {
@@ -71,6 +96,8 @@ class RunKakashiRun {
             this.bg.draw();
             this.tree.draw();
             this.grass.draw();
+            this.grass.drawRocks();
+            this.grass.moveRocks();
         }
     }
 }

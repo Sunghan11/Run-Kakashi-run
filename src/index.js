@@ -1,14 +1,6 @@
 import "./styles/index.scss";
 import RunKakashiRun from "./game";
 
-const testObj = {
-    key1: "hi",
-    key2: {
-        key3: "Run Kakashi",
-    },
-};
-
-const greeting = testObj?.key2?.key3 || testObj.key1;
 document.addEventListener("DOMContentLoaded", () => {
     // document.body.classList.add("center");
     // const card = document.createElement("div");

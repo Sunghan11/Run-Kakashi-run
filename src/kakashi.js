@@ -27,6 +27,10 @@ const JUMPSPRITE = {
     jump12: [220, 165, 55, 55],
 }
 
+const SLIDESPRITE = {
+    slide1: [220,220,55,55],
+}
+
 const POSESPRITE = {
     pose1: [0, 220, 55, 55],
     pose2: [55, 220, 55, 55],
@@ -34,17 +38,21 @@ const POSESPRITE = {
     pose4: [165, 220, 55, 55],
 }
 
+
 class Kakashi {
 
     constructor(props) {
         this.position = props.position;
         this.jumping = false;
+        this.sliding = false;
         this.jumpCount = 0;
+        this.slideCount = 0;
         this.spriteSheet = new Image();
-        this.spriteSheet.src = '../images/kakashi.png';
+        this.spriteSheet.src = '../images/kakashi2.png';
         this.runAnimation = 0;
         this.jumpAnimation = 0;
         this.poseAnimation = 0;
+        this.slideAnimation = 0;
         this.gameOver = false;
     }
 
@@ -66,12 +74,29 @@ class Kakashi {
         }
     }
 
+    slide() {
+        if (this.sliding) {
+            if(this.slideCount === 0 || this.onGround()) {
+                this.position[1] = 230;
+                this.slideCount += 1
+            } else {
+                this.position[1] = 220;
+                this.slideCount = 0;
+                this.sliding = false;
+            }
+        }
+    }
+
     onGround() {
         return this.position[0] === 100 && this.position[1] >= 220;
     }
-
+    
     toggleJump() {
         this.jumping = true;
+    }
+    
+    toggleSlide() {
+        this.sliding = true;
     }
 
     getFrame() {
@@ -84,6 +109,14 @@ class Kakashi {
         } else if (this.gameOver && this.poseAnimaton === 20) {
             this.poseAnimation = 0;
             return POSESPRITE.pose1;
+        } else if(this.sliding && this.onGround() && this.slideAnimation < 50) {
+            this.slideAnimation += 1;
+            return SLIDESPRITE.slide1;
+        }else if (this.slideAnimation >= 50) {
+            this.sliding = false;
+            this.position[1] = 220;
+            this.slideAnimation = 0;
+            return RUNSPRITE.run1;
         } else if (this.onGround() && this.runAnimation < 5) {
             this.runAnimation += 1;
             return RUNSPRITE.run1;
@@ -141,9 +174,15 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation < 54) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump12;
-        } else {
+        } else if (!this.onGround() && this.jumpAnimation >= 54) {
             this.jumpAnimation = 0;
-            return JUMPSPRITE.jump10;
+            return RUNSPRITE.run1;
+        // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
+        //     this.slideAnimation += 1;
+        //     return SLIDESPRITE.slide1;
+        } else {
+            this.slideAnimation = 0;
+            return RUNSPRITE.run1;
         }
     }
 
@@ -165,9 +204,10 @@ class Kakashi {
 
     update(ctx) {
         this.jump();
+        this.slide();
         this.draw(ctx);
     }
 
 }
 
-module.exports = Kakashi;
+export default Kakashi;
