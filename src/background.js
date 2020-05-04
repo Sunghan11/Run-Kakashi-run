@@ -95,13 +95,14 @@ class Background {
     drawRocks() {
         this.eachRock(function(rock) {
             this.ctx.fillStyle = "grey";
-
+            this.ctx.strokeStyle = "black";
             this.ctx.fillRect(
                 rock.left,
                 rock.top,
                 CONSTANTS.ROCK_WIDTH,
                 rock.bottom
             );
+        
         });
     }
 

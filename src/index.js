@@ -1,4 +1,4 @@
-import "./styles/index.scss";
+import "./styles/index.css";
 import RunKakashiRun from "./game";
 
 document.addEventListener("DOMContentLoaded", () => {

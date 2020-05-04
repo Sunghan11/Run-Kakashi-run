@@ -41,8 +41,8 @@ const POSESPRITE = {
 
 class Kakashi {
 
-    constructor(props) {
-        this.position = props.position;
+    constructor() {
+        // this.position = props.position;
         this.jumping = false;
         this.sliding = false;
         this.jumpCount = 0;
@@ -92,11 +92,15 @@ class Kakashi {
     }
     
     toggleJump() {
-        this.jumping = true;
+        if (this.sliding !== true) {
+            this.jumping = true;
+        }
     }
     
     toggleSlide() {
-        this.sliding = true;
+        if (this.jumping !== true) {
+            this.sliding = true;
+        }
     }
 
     getFrame() {

@@ -8,7 +8,7 @@ class RunKakashiRun {
     constructor(ctx, gameCanvas, bgCtx, treeCtx, grassCtx) {
         this.ctx = ctx;
         this.gameCanvas = gameCanvas;
-        this.kakashi = new Kakashi({ position: [100, 220] });
+        this.kakashi = new Kakashi;
         this.obstacles = [];
         this.score = new Score(1);
         this.muteMusic = false;
