@@ -1,4 +1,4 @@
-import kakashi2Src from "./images/kakashi2.pnggit "
+import kakashi2Src from "./images/kakashi2.png"
 
 const CONSTANTS = {
     GRAVITY: 0.4,
