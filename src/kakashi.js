@@ -1,3 +1,5 @@
+import kakashi2Src from "./images/kakashi2.pnggit "
+
 const CONSTANTS = {
     GRAVITY: 0.4,
     VELOCITY: 11,
@@ -48,7 +50,7 @@ class Kakashi {
         this.jumpCount = 0;
         this.slideCount = 0;
         this.spriteSheet = new Image();
-        this.spriteSheet.src = '../images/kakashi2.png';
+        this.spriteSheet.src = kakashi2Src;
         this.runAnimation = 0;
         this.jumpAnimation = 0;
         this.poseAnimation = 0;

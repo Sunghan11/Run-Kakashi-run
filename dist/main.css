@@ -1,4 +1,92 @@
-.game-main{position:relative;width:vw;margin:auto}.game-display{height:300px;width:800px;position:relative;display:inline-block;margin:auto}#canvas{background:transparent;border:2px solid orange;z-index:10;top:0;left:0;position:absolute}#bg-canvas{top:0;left:0;position:absolute;z-index:5}#tree-canvas{top:0;left:0;position:absolute;z-index:5}#grass-canvas{top:0;left:0;position:absolute;z-index:5}#play-button{position:relative;top:70px;left:50px;font-family:'Open Sans', sans-serif;color:black}#play-button:hover{color:orange}.menu{position:relative;width:750;top:5;left:5;z-index:15;background:white;text-align:center;display:block}span{font-family:'Sigmar One', cursive;font-size:35px;margin-top:20px;color:orange;text-shadow:4px 4px 4px 4px rgba(0,0,0,0.4)}.close{display:none}.toggled{text-decoration:line-through}
+.game-main {
+  position: relative;
+  width: vw;
+  margin: auto;
+}
+
+
+.game-display {
+  height: 300px;
+  width: 800px;
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+#canvas {
+  background: transparent;
+  border: 2px solid orange;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+#bg-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
+}
+
+#tree-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
+}
+
+#grass-canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 5;
+}
+
+#play-button {
+  position: relative;
+  top: 70px;
+  left: 50px;
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
+
+#play-button:hover {
+  color: orange;
+}
+
+
+
+.menu {
+  position: relative;
+  width: 750;
+  top: 5;
+  left: 5;
+  z-index: 15;
+  background:white;
+  text-align: center;
+  display: block;
+
+}
+
+
+span {
+  font-family: 'Sigmar One', cursive;
+  font-size: 35px;
+  margin-top: 20px;
+  color: orange;
+  text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4); 
+}
+
+
+.close {
+  display: none;
+}
+
+.toggled {
+  text-decoration: line-through;
+}
+
 
 
 /*# sourceMappingURL=main.css.map*/

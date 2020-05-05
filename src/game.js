@@ -2,6 +2,9 @@ import Kakashi from './kakashi';
 import Background from './background';
 import Score from './score';
 import { Menu } from './menu';
+import backgroundWaterSrc from './images/backgroundWater.jpg';
+import darkTreesSrc from './images/darkTrees.png';
+import grassSrc from './images/grass.png';
 
 
 class RunKakashiRun {
@@ -53,15 +56,15 @@ class RunKakashiRun {
 
     createBackground(bgCtx, treeCtx, grassCtx) {
         const bgImage = new Image();
-        bgImage.src = '../images/backgroundWater.jpg';
+        bgImage.src = backgroundWaterSrc;
         this.bg = new Background(bgCtx, bgImage, -35, 1400, 1);
 
         const treeImage = new Image();
-        treeImage.src = '../images/darkTrees.png';
+        treeImage.src = darkTreesSrc;
         this.tree = new Background(treeCtx, treeImage, 115, 400, 3);
 
         const grassImage = new Image();
-        grassImage.src = '../images/grass.png';
+        grassImage.src = grassSrc;
         this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
 
 

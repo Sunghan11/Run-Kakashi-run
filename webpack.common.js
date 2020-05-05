@@ -51,7 +51,7 @@ module.exports = {
                             // by default it uses publicPath in webpackOptions.output
                             name: "[name].[ext]",
                             outputPath: "images/",
-                            publicPath: "images/"
+                            publicPath: "src/images/"
                         }
                     }
                 ]
