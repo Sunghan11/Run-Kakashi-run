@@ -3,6 +3,8 @@ import kakashi2Src from "./images/kakashi2.png"
 const CONSTANTS = {
     GRAVITY: 0.4,
     VELOCITY: 11,
+    KAKASHI_WIDTH: 55,
+    KAKASHI_HEIGHT: 55,
 }
 
 const RUNSPRITE = {
@@ -56,6 +58,8 @@ class Kakashi {
         this.poseAnimation = 0;
         this.slideAnimation = 0;
         this.gameOver = false;
+        this.x = 100;
+        this.y = 220;
     }
 
     jump() {
@@ -212,6 +216,15 @@ class Kakashi {
         this.jump();
         this.slide();
         this.draw(ctx);
+    }
+
+    bounds() {
+        return {
+            left: this.x,
+            right: this.x + CONSTANTS.KAKASHI_WIDTH,
+            top: this.y,
+            bottom: this.y + CONSTANTS.KAKASHI_HEIGHT
+        };
     }
 
 }

@@ -12,16 +12,13 @@ class RunKakashiRun {
         this.ctx = ctx;
         this.gameCanvas = gameCanvas;
         this.kakashi = new Kakashi;
-        this.obstacles = [];
         this.score = new Score(1);
-        this.muteMusic = false;
-
         this.jump = this.jump.bind(this);
         this.slide = this.slide.bind(this);
         this.draw = this.draw.bind(this);
         this.createBackground(bgCtx, treeCtx, grassCtx);
         this.setButtonListeners();
-        // this.restart = this.restart.bind(this);
+        this.restart = this.restart.bind(this);
 
         Menu.menuButtons(this);
     }
@@ -73,12 +70,12 @@ class RunKakashiRun {
     restart() {
         this.gamePlaying = false;
         this.score = 0;
-        this.kakashi = new Kakashi()
+        this.start();
     }
 
     gameOver() {
         return (
-            this.gameCanvas.collidesWith(this.kakashi.bounds())
+            this.background.collidesWith(this.kakashi)
         )
     }
 
@@ -101,7 +98,12 @@ class RunKakashiRun {
             this.grass.draw();
             this.grass.drawRocks();
             this.grass.moveRocks();
+        } else {
+            alert(this.score);
+            this.restart();
         }
+
+        // this.background.passedRock();
     }
 }
 

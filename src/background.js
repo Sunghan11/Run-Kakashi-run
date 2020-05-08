@@ -66,7 +66,7 @@ class Background {
             if (rect1.left > rect2.right || rect1.right < rect2.left) {
                 return false;
             }
-            if (rect1.top > rect2.bottom || rect1.bottom < rect2.top) {
+            if (rect1.top < rect2.bottom || rect1.bottom > rect2.top) {
                 return false;
             }
             return true;
@@ -75,6 +75,7 @@ class Background {
         this.eachRock((rock) => {
             if (_overlap(rock, kakashi)) {
                     collision = true;
+                    console.log("hit");
                 }
         });
         return collision;
