@@ -25,20 +25,23 @@
             <div class="game-main">
                 <div class="game-display">
                     <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
-                    <canvas id="bg-canvas" height="302" width="802"></canvas>
-                    <canvas id="tree-canvas" height="302" width="802"></canvas>
-                    <canvas id="grass-canvas" height="302" width="802"></canvas>
+                    <canvas id="bg-canvas" height="303" width="803"></canvas>
+                    <canvas id="tree-canvas" height="303" width="803"></canvas>
+                    <canvas id="grass-canvas" height="303" width="803"></canvas>
 
                     <div class="menu">
-                        <span>Run Kakashi Run</span>
-                        <div class="kakashi"></div>
-                        <p>How to Play</p>
-                        <p>Press Space, W, or Up Arrow to Jump</p>
-                        <p>Press Ctrl, S, or Down Arrow to Slide</p>
+                        <canvas id="menu-canvas" height="303" width="803"></canvas>
+                        <script src="./src/menuCanvas.js"></script>
+                        <div class="kakashi">
+                            <span>Run Kakashi Run</span>
+                            <p>How to Play</p>
+                            <p>SPACE or UP to Jump</p>
+                            <p>CTRL or DOWN to Slide</p>
 
-                        <nav class="gameplay-nav group">
-                            <button id="play-button">Play</button>
-                        </nav>
+                            <nav class="gameplay-nav group">
+                                <button id="play-button">PLAY</button>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>

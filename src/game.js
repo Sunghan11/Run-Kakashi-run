@@ -16,7 +16,7 @@ class RunKakashiRun {
         this.jump = this.jump.bind(this);
         this.slide = this.slide.bind(this);
         this.draw = this.draw.bind(this);
-        this.createBackground(bgCtx, treeCtx, grassCtx);
+        this.background = this.createBackground(bgCtx, treeCtx, grassCtx);
         this.setButtonListeners();
         this.restart = this.restart.bind(this);
 
@@ -63,14 +63,26 @@ class RunKakashiRun {
         const grassImage = new Image();
         grassImage.src = grassSrc;
         this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
+    }
 
+    createFireball() {
+        
+    }
+
+    createRock() {
 
     }
 
     restart() {
-        this.gamePlaying = false;
+        this.fireballs = [];
+        this.kakashi.restart();
+        this.gameOver = false;
+
         this.score = 0;
-        this.start();
+        this.kakashi = new Kakashi;
+        this.background = new Background;
+
+        this.draw();
     }
 
     gameOver() {
@@ -96,8 +108,10 @@ class RunKakashiRun {
             this.bg.draw();
             this.tree.draw();
             this.grass.draw();
-            this.grass.drawRocks();
-            this.grass.moveRocks();
+            // this.grass.drawRocks();
+            // this.grass.moveRocks();
+            this.createFireball();
+            this.createRock();
         } else {
             alert(this.score);
             this.restart();

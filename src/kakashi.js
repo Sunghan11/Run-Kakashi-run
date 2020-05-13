@@ -197,7 +197,7 @@ class Kakashi {
     }
 
     draw(ctx) {
-        ctx.clearRect(0, 0, 800, 300);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
         const sprite = this.getFrame();
         ctx.drawImage(
             this.spriteSheet,

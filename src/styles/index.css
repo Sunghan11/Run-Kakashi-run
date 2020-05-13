@@ -15,7 +15,7 @@
 
 #canvas {
   background: transparent;
-  border: 2px solid orange;
+  border: 2px solid red;
   z-index: 10;
   top: 0;
   left: 0;
@@ -46,13 +46,16 @@
 #play-button {
   position: relative;
   top: 70px;
-  left: 50px;
   font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
   color: black;
+  cursor: pointer;
 }
 
 #play-button:hover {
-  color: orange;
+  color: white;
+  text-shadow: 1px 0 5px red;
+  /* font-size: 30px; */
 }
 
 
@@ -74,8 +77,9 @@ span {
   font-family: 'Sigmar One', cursive;
   font-size: 35px;
   margin-top: 20px;
-  color: orange;
-  text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4); 
+  color: white;
+  /* text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);  */
+  text-shadow: 1px 0 10px red;
 }
 
 
@@ -87,3 +91,29 @@ span {
   text-decoration: line-through;
 }
 
+.menu {
+  position: relative;
+  width: 802px;
+}
+
+#menu-canvas {
+  background-image: url("../images/sharingan.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* align-items: center; */
+}
+
+.kakashi {
+  color: white;
+  position: absolute;
+  top: 50px;
+  left: 200px;
+  align-content: center;
+  margin: auto 0;
+  font-weight: bold;
+}
+
+#play-button {
+  color: white;
+}
