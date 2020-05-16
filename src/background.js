@@ -117,11 +117,11 @@ class Background {
         if (this.x <= -this.imgWidth) {
             this.x = 0;
         }
-        this.scrollingBg();
+        this.move();
         // this.moveRocks();
     }
 
-    scrollingBg() {
+    move() {
         this.x -= this.speed;
     }
 

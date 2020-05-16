@@ -1,7 +1,10 @@
 .game-main {
   position: relative;
   width: vw;
-  margin: auto;
+  height: vh;
+  margin: 0 auto;
+  align-items: flex-end;
+  
 }
 
 
@@ -10,7 +13,8 @@
   width: 800px;
   position: relative;
   display: inline-block;
-  margin: auto;
+  margin: 0 auto;
+  align-items: center;
 }
 
 #canvas {

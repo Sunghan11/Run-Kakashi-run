@@ -51,8 +51,8 @@ class Kakashi {
         this.sliding = false;
         this.jumpCount = 0;
         this.slideCount = 0;
-        this.spriteSheet = new Image();
-        this.spriteSheet.src = kakashi2Src;
+        this.sprites = new Image();
+        this.sprites.src = kakashi2Src;
         this.runAnimation = 0;
         this.jumpAnimation = 0;
         this.poseAnimation = 0;
@@ -200,15 +200,15 @@ class Kakashi {
         ctx.clearRect(0, 0, innerWidth, innerHeight);
         const sprite = this.getFrame();
         ctx.drawImage(
-            this.spriteSheet,
-            sprite[0],
-            sprite[1],
-            sprite[2],
-            sprite[3],
-            this.position[0],
-            this.position[1],
-            sprite[2],
-            sprite[3]
+            this.sprites, //image
+            sprite[0], //sx
+            sprite[1], //sy
+            sprite[2], //sWidth
+            sprite[3], //sHeight
+            this.position[0], //dx
+            this.position[1], //dy
+            sprite[2], //dWidth
+            sprite[3] //dHeight
         );
     }
 
@@ -225,6 +225,25 @@ class Kakashi {
             top: this.y,
             bottom: this.y + CONSTANTS.KAKASHI_HEIGHT
         };
+    }
+
+    collidesWith(rock, fireball) {
+        const _overlap = (obstacle, kakashi) => {
+            if (obstacle.left > kakashi.right || obstacle.right < kakashi.left) {
+                return false;
+            }
+            if (obstacle.top < kakashi.bottom || obstacle.bottom > kakashi.top) {
+                return false;
+            }
+            return true;
+        };
+        let collision = false;
+        // this.eachRock((rock) => {
+            if (_overlap(rock, kakashi || _overlap(fireball, kakashi))) {
+                collision = true;
+                console.log("hit");
+            }
+        return collision;
     }
 
 }
