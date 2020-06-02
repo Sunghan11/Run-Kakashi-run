@@ -1,26 +1,31 @@
 .game-main {
-  position: relative;
-  width: vw;
-  margin: auto;
-}
-
-div {
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  justify-content: center;
   
 }
+
+body {
+  height: 100vh;
+  background: grey;
+}
+
 
 .game-display {
   height: 300px;
   width: 800px;
   position: relative;
   display: inline-block;
-  margin: auto;
+  margin: 0 auto;
+  align-items: center;
 }
 
 #canvas {
   background: transparent;
-  border: 2px solid orange;
+  /* border: 2px solid red; */
   z-index: 10;
   top: 0;
   left: 0;
@@ -51,13 +56,16 @@ div {
 #play-button {
   position: relative;
   top: 70px;
-  left: 50px;
   font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
   color: black;
+  cursor: pointer;
 }
 
 #play-button:hover {
-  color: orange;
+  color: white;
+  text-shadow: 1px 0 5px red;
+  /* font-size: 30px; */
 }
 
 
@@ -65,10 +73,10 @@ div {
 .menu {
   position: relative;
   width: 750;
-  top: 5;
-  left: 5;
+  /* top: 5;
+  left: 5; */
   z-index: 15;
-  background:white;
+  /* background:white; */
   text-align: center;
   display: block;
 
@@ -79,8 +87,9 @@ span {
   font-family: 'Sigmar One', cursive;
   font-size: 35px;
   margin-top: 20px;
-  color: orange;
-  text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4); 
+  color: white;
+  /* text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);  */
+  text-shadow: 1px 0 10px red;
 }
 
 
@@ -92,6 +101,37 @@ span {
   text-decoration: line-through;
 }
 
+.menu {
+  position: relative;
+  width: 800px;
+}
+
+#menu-canvas {
+  background-image: url(src/images/sharingan.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid red;
+  /* align-items: center; */
+}
+
+game-over-canvas {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.kakashi {
+  color: white;
+  position: absolute;
+  top: 50px;
+  left: 200px;
+  align-content: center;
+  margin: auto 0;
+  font-weight: bold;
+}
+
+#play-button {
+  color: white;
+}
 
 
 /*# sourceMappingURL=main.css.map*/
