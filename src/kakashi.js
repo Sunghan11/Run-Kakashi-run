@@ -3,6 +3,8 @@ import kakashi2Src from "./images/kakashi2.png"
 const CONSTANTS = {
     GRAVITY: 0.4,
     VELOCITY: 11,
+    KAKASHI_WIDTH: 55,
+    KAKASHI_HEIGHT: 55,
 }
 
 const RUNSPRITE = {
@@ -49,13 +51,15 @@ class Kakashi {
         this.sliding = false;
         this.jumpCount = 0;
         this.slideCount = 0;
-        this.spriteSheet = new Image();
-        this.spriteSheet.src = kakashi2Src;
+        this.sprites = new Image();
+        this.sprites.src = kakashi2Src;
         this.runAnimation = 0;
         this.jumpAnimation = 0;
         this.poseAnimation = 0;
         this.slideAnimation = 0;
         this.gameOver = false;
+        this.x = 100;
+        this.y = 220;
     }
 
     jump() {
@@ -193,18 +197,18 @@ class Kakashi {
     }
 
     draw(ctx) {
-        ctx.clearRect(0, 0, 800, 300);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
         const sprite = this.getFrame();
         ctx.drawImage(
-            this.spriteSheet,
-            sprite[0],
-            sprite[1],
-            sprite[2],
-            sprite[3],
-            this.position[0],
-            this.position[1],
-            sprite[2],
-            sprite[3]
+            this.sprites, //image
+            sprite[0], //sx
+            sprite[1], //sy
+            sprite[2], //sWidth
+            sprite[3], //sHeight
+            this.position[0], //dx
+            this.position[1], //dy
+            sprite[2], //dWidth
+            sprite[3] //dHeight
         );
     }
 
@@ -212,6 +216,34 @@ class Kakashi {
         this.jump();
         this.slide();
         this.draw(ctx);
+    }
+
+    bounds() {
+        return {
+            left: this.x,
+            right: this.x + CONSTANTS.KAKASHI_WIDTH,
+            top: this.y,
+            bottom: this.y + CONSTANTS.KAKASHI_HEIGHT
+        };
+    }
+    
+    collidesWith(rock) {
+        let collision = false;
+        const _overlap = (rock) => {
+            if (rock.bounds().left > this.bounds().right || rock.bounds().right < this.bounds().left) {
+                return false;
+            }
+            if (rock.bounds().top < this.bounds().bottom || rock.bounds().bottom > this.bounds().top) {
+                return false;
+            }
+            return true;
+        };
+        // this.eachRock((rock) => {
+            if (_overlap(rock)) {
+                collision = true;
+                console.log("hit");
+            }
+        return collision;
     }
 
 }

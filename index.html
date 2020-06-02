@@ -12,6 +12,10 @@
         <link rel="stylesheet" type="text/css" href="./src/styles/reset.css" />
         <link rel="stylesheet" href="./src/styles/index.css" />
         <script src="./dist/main.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
 
     </head>
 
@@ -21,21 +25,29 @@
             <div class="game-main">
                 <div class="game-display">
                     <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
-                    <canvas id="bg-canvas" height="302" width="802"></canvas>
-                    <canvas id="tree-canvas" height="302" width="802"></canvas>
-                    <canvas id="grass-canvas" height="302" width="802"></canvas>
+                    <canvas id="bg-canvas" height="300" width="800"></canvas>
+                    <canvas id="tree-canvas" height="300" width="800"></canvas>
+                    <canvas id="grass-canvas" height="300" width="800"></canvas>
 
-                    <div class="menu">
-                        <span>Run Kakashi Run</span>
-                        <div class="kakashi"></div>
-                        <p>How to Play</p>
-                        <p>Press Space, W, or Up Arrow to Jump</p>
-                        <p>Press Ctrl, S, or Down Arrow to Slide</p>
+                    <section class="menu">
+                        <canvas id="menu-canvas" height="300" width="800"></canvas>
+                        <script src="./src/menuCanvas.js"></script>
+                        <div class="kakashi">
+                            <span>Run Kakashi Run</span>
+                            <p>How to Play</p>
+                            <p>Dodge Obstacles</p>
+                            <p>SPACE or UP to Jump</p>
+                            <p>CTRL or DOWN to Slide</p>
 
-                        <nav class="gameplay-nav group">
-                            <button id="play-button">Play</button>
-                        </nav>
-                    </div>
+                            <nav class="gameplay-nav group">
+                                <button id="play-button">PLAY</button>
+                            </nav>
+                        </div>
+                    </section>
+                    <section class="game-over">
+                        <canvas id="game-over-canvas" height="300" width="800"></canvas>
+                        <script src="./src/menuCanvas.js"></script>
+                    </section>
                 </div>
             </div>
         </main>
