@@ -13,21 +13,31 @@ class RunKakashiRun {
     constructor(ctx, gameCanvas, bgCtx, treeCtx, grassCtx) {
         this.ctx = ctx;
         this.gameCanvas = gameCanvas;
-        this.kakashi = new Kakashi;
+        this.kakashi = new Kakashi({ pos: [100, 220] });
         // this.fireball = new Fireball;
         // this.fireball2 = new Fireball;
         // this.fireball3 = new Fireball;
-        this.rock = new Rock;
+        // this.rock = new Rock;
         this.score = new Score(1);
         this.jump = this.jump.bind(this);
         this.slide = this.slide.bind(this);
         this.draw = this.draw.bind(this);
         this.background = this.createBackground(bgCtx, treeCtx, grassCtx);
-        this.setButtonListeners();
-        this.restart = this.restart.bind(this);
-        this.obstacles = [];
+        this.addListeners();
+        this.restartGame = this.restartGame.bind(this);
+        this.start = this.start.bind(this);
+        // this.obstacles = [];
+        // this.fireballsArr = [];
+        // this.rocksArr = [];
+        // this.fireballs = 0;
+        // this.rocks = 0;
+        // this.maxObstacles = 3;
+        // this.spawnTime = 70;
+        // this.spawnCount = 0;
+        // this.fireballSpawnCount = 0;
+        // this.fireballSpawnTime = 140;
 
-        
+
 
         Menu.menuButtons(this);
     }
@@ -37,25 +47,30 @@ class RunKakashiRun {
     jump(event) {
         if ((event.code === 'Space' || event.code === 'KeyW' || event.code === 'ArrowUp') && this.gamePlaying) {
             event.preventDefault();
-            this.kakashi.toggleJump();
+            if (!this.gameOver) {
+                this.kakashi.toggleJump();
+            }
         }
     }
 
     slide(event) {
         if ((event.code === 'ControlLeft' || event.code === 'KeyS' || event.code === 'ArrowDown') && this.gamePlaying) {
             event.preventDefault();
-            this.kakashi.toggleSlide();
+            if (!this.gameOver) {
+                this.kakashi.toggleSlide();
+            }
         }
     }
 
 
-    setButtonListeners() {
+    addListeners() {
         this.gameCanvas.addEventListener('keydown', this.jump);
         this.gameCanvas.addEventListener('keydown', this.slide);
-        this.gameCanvas.addEventListener('keydown', this.restart);
+        // this.gameCanvas.addEventListener('keydown', this.restartGame);
         this.gameCanvas.addEventListener('keydown', e => {
-            if (e.code === 'Escape' && this.gamePlaying) {
+            if (e.code === 'KeyR' && this.canRestart) {
                 e.preventDefault();
+                this.start();
             }
         })
     }
@@ -74,16 +89,6 @@ class RunKakashiRun {
         this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
     }
 
-    
-    generateObstacles() {
-        // while (this.obstacles.length < 4) {  
-            this.createFireball();
-            this.createRock();
-            // this.obstacles.shift();
-        // }
-        // this.createFireball(this.generateObstaclesSpacing())
-    }
-
     generateObstaclesSpacing() {
         return Math.floor(Math.random() * 500 + 150);
     }
@@ -91,98 +96,98 @@ class RunKakashiRun {
     eachObstacle(callback) {
         this.obstacles.forEach(callback.bind(this));
     }
-    
 
-    createFireball() {
-        this.fireball = null;
-        this.fireball2 = null;
-        this.fireball3 = null;
-        // this.fireballs = [];
-        this.fireball = new Fireball();
-        this.fireball2 = new Fireball();
-        this.fireball3 = new Fireball();
-        this.fireball.position = [900, 190];
-        this.fireball2.position = [900, 100];
-        this.fireball3.position = [900, 145];
-        if (this.fireball.position[0] === 0) {
-            this.fireball = null;
-            this.fireball = new Fireball();
-            this.fireball.position = [900, 190];
+
+    createFireballs() {
+        if (this.fireballsArr.length < this.maxObstacles && this.fireballSpawnCount === 0) {
+            let fb1 = new Fireball({ pos: [900, 190] });
+            let fb2 = new Fireball({ pos: [900, 100] });
+            let fb3 = new Fireball({ pos: [900, 145] });
+            this.fireballsArr.push([fb1, fb2, fb3]);
+            this.fireballSpawnCount++;
+        } else if (this.fireballSpawnCount === 200) {
+            this.fireballSpawnCount = 0;
+        } else {
+            this.fireballSpawnCount++;
         }
-        // this.fireball.position = [1000, 190];
-        // this.fireball2 = new Fireball(1000, 100);
-        // this.fireballs.push(this.fireball);
-        // this.fireballs.push(this.fireball2);
-        this.obstacles.push('fireball')
-        if (this.fireball.position[0] < 500) {
-            this.obstacles.shift();
+    }
+
+    createRocks() {
+        // let rock = null;
+        if (this.rocksArr.length < this.maxObstacles && this.spawnCount === 0) {
+            let rock = new Rock({ pos: [(this.generateObstaclesSpacing() + 800), 195] });
+            // rock.position = [this.generateObstaclesSpacing() + 800, 195];
+            this.rocksArr.push(rock);
+            console.log("spawn");
+            // this.rocks += 1;
+            this.spawnCount++;
+        } else if (this.spawnCount === 150) {
+            // this.rocksArr = [];
+            this.spawnCount = 0;
+        } else {
+            this.spawnCount++;
         }
-        
-
-        return this.fireball;
-    }
-
-    createRock() {
-        this.rock = new Rock();
-        this.rock.position = [1100,195];
-    }
-
-    restart() {
-        this.kakashi.restart();
-        this.gameOver = false;
-
-        this.score = 0;
-        this.kakashi = new Kakashi;
-        this.rock = new Rock;
-        this.fireball = new Fireball;
-        this.background = new Background;
-
-        this.draw();
-    }
-
-    gameOver() {
-        this.kakashi.collidesWith(this.rock);
-        this.gameStop();
-    }
-
-    gameOverDraw() {
-        this.ctx.font = '48px serif';
-        this.strokeText('GAME OVER', 10, 50);
-        this.ctx.font = '38px serif';
-        this.strokeText("Press 'R' to run again")
     }
 
     start() {
         document.getElementById('canvas').focus();
         this.gamePlaying = true;
+        this.canRestart = false;
         this.gameOver = false;
         this.score.score = 0;
         this.kakashi.position = [100, 220];
-        // this.createFireball();
-        this.createRock();
-        this.generateObstacles();
-        this.canRestart = false;
-     
-        // this.fireball.position = [1000,190];
-        // this.fireball2.position = [1000, 100];
-        // this.fireball3.position = [970, 145];
+        this.obstacles = [];
+        this.rocksArr = [];
+        this.fireballsArr = [];
+        this.fireballs = 0;
+        this.rocks = 0;
+        this.maxObstacles = 3;
+        this.spawnTime = 70;
+        this.spawnCount = 0;
+        this.fireballSpawnCount = 0;
+        this.fireballSpawnTime = 140;
+        // document.getElementById('game-over-canvas');
+
         this.draw();
+    }
+
+    gameOverDraw() {
+
+        var gradient = ctx.createLinearGradient(0, 0, 800, 0);
+        gradient.addColorStop("0", "#66ccff");
+        gradient.addColorStop("0.5", "#ffcc66");
+        gradient.addColorStop("1.0", "#ffcc66");
+        this.ctx.font = '48px Arial';
+        this.ctx.fillStyle = "red";
+        this.ctx.lineWidth = 2;
+        this.ctx.fillText('GAME OVER', 200, 50);
+        this.ctx.strokeText('GAME OVER', 200, 50);
+        this.ctx.font = '30px Arial';
+        this.ctx.fillStyle = gradient;
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeText("Press 'R' to run again", 200, 100);
+        this.ctx.fillText("Press 'R' to run again", 200, 100);
     }
 
     gameStop() {
         this.gameOver = true;
+        this.gamePlaing = false;
+        this.canRestart = true;
         this.gameOverDraw();
-        this.canRestart = true
+
     }
 
-    restartGame(e) {
-        if (e.key === 'r' && this.canRestart) {
-            e.preventDefault();
+    restartGame(event) {
+        if (event.code === 'KeyR') {
+            event.preventDefault();
+            // if (this.canRestart ) {
+            //     console.log("r pressed")
             this.start();
+            // }
         }
     }
 
-     draw() {
+    draw() {
         if (!this.gameOver) {
             requestAnimationFrame(this.draw);
             this.kakashi.update(this.ctx);
@@ -190,50 +195,55 @@ class RunKakashiRun {
             this.bg.draw();
             this.tree.draw();
             this.grass.draw();
-            
-            
-            this.fireball.update(this.ctx);
-            this.fireball2.update(this.ctx);
-            this.fireball3.update(this.ctx);
-            this.rock.update(this.ctx);
+            this.createRocks();
+            this.createFireballs();
+
+
+            // this.fireball.update(this.ctx);
+            // this.fireball2.update(this.ctx);
+            // this.fireball3.update(this.ctx);
+            // this.rock.update(this.ctx);
             let idx = null;
-            this.obstacles.forEach((obstacle, i => {
-                if (obstacle.outside() === true) {
+            this.rocksArr.forEach((rock, i) => {
+                rock.update(this.ctx);
+                // console.log(this.kakashi.position[0]);
+                // console.log(rock.position[0]);
+                if (rock.position[0] < -300) {
+                    // this.rocksArr.splice(0, 1);
                     idx = i;
-                    console.log("outside")
+                    // console.log("rock spawned");
                 }
-                if (this.kakashi.collidesWith(this.rock) === true) {
-                    console.log("hit")
+                if (this.kakashi.collidesWith(rock) === true) {
+                    // console.log("hit")
+                    this.gameStop();
                 }
-            }));
+            });
             if (idx !== null) {
-                this.obstacles.splice(idx, 1);
+                // console.log("rock removed")
+                this.rocksArr.splice(idx, 1);
             }
 
-            // if (this.kakashi.collidesWith(this.rock, this.fireball) ||
-            // this.kakashi.collidesWith(this.rock, this.fireball2 ||
-            //     this.kakashi.collidesWith(this.rock, this.fireball3))) {
-                //     this.gameStop();
-                // }
-            // this.grass.drawRocks();
-            // this.grass.moveRocks();
-            // this.fireballs.forEach((fireball, idx) => {
-            //     fireball.animate(this.ctx);
-            //     if (fireball.position[0] < -200) {
-            //         this.fireballs.splice(idx, 1)
-            //     }
-            //     if (this.kakashi.collidesWith(rock, firebal)) {
-            //         this.gameStop();
-            //     }
-            // })
-            // this.createFireball();
-            // this.createRock();
-        } else {
-            alert(this.score);
-            this.restart();
+            let fireIdx = null;
+            this.fireballsArr.forEach((fireball, i) => {
+                fireball[0].update(this.ctx);
+                fireball[1].update(this.ctx);
+                fireball[2].update(this.ctx);
+                if (fireball[0].position[0] < -300) {
+                    fireIdx = i;
+                    // console.log("fireball spawned");
+                }
+                if (this.kakashi.collidesWith(fireball[2])) {
+                    this.gameStop();
+                }
+                if (this.kakashi.collidesWith(fireball[1])) {
+                    this.gameStop();
+                }
+            });
+            if (fireIdx !== null) {
+                // console.log("fireball removed")
+                this.fireballsArr.splice(fireIdx, 1);
+            }
         }
-
-        // this.background.passedRock();
     }
 }
 

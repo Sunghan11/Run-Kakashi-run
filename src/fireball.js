@@ -1,12 +1,12 @@
-import {collision} from './collision';
+import { collision } from './collision';
 import fireballSrc from "./images/fireball.png";
 
 const CONSTANTS = {
     SPEED: 7,
     WARM_UP_SECONDS: 5,
     EDGE_BUFFER: 50,
-    OBJECT_WIDTH: 70,
-    OBJECT_HEIGHT: 40
+    OBJECT_WIDTH: 70, //fireball width
+    OBJECT_HEIGHT: 40 //fireball height
 }
 
 const FIRESPRITE = {
@@ -17,14 +17,15 @@ const FIRESPRITE = {
 }
 
 class Fireball {
-    constructor() {
+    constructor(props) {
         this.fireSprites = new Image();
         this.fireSprites.src = fireballSrc;
         this.fireAnimation = 0;
+        this.position = props.pos;
     }
 
     getFrame() {
-        if(this.fireAnimation < 5) {
+        if (this.fireAnimation < 5) {
             this.fireAnimation += 1;
             return FIRESPRITE.fire1;
         } else if (this.fireAnimation < 10) {
@@ -44,7 +45,7 @@ class Fireball {
 
     draw(ctx) {
         ctx.beginPath();
-      
+
         console.log('fireballl');
         // ctx.clearRect(0, 0, 800, 300);
         const sprite = this.getFrame();
@@ -65,10 +66,6 @@ class Fireball {
 
     move() {
         this.position[0] -= CONSTANTS.SPEED;
-    }
-
-    outside() {
-        return this.position[0] < -100;
     }
 
     update(ctx) {

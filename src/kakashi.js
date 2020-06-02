@@ -32,7 +32,7 @@ const JUMPSPRITE = {
 }
 
 const SLIDESPRITE = {
-    slide1: [220,220,55,55],
+    slide1: [220, 220, 55, 55],
 }
 
 const POSESPRITE = {
@@ -45,8 +45,8 @@ const POSESPRITE = {
 
 class Kakashi {
 
-    constructor() {
-        // this.position = props.position;
+    constructor(props) {
+        this.position = props.pos;
         this.jumping = false;
         this.sliding = false;
         this.jumpCount = 0;
@@ -60,6 +60,8 @@ class Kakashi {
         this.gameOver = false;
         this.x = 100;
         this.y = 220;
+
+        this.bounds = this.bounds.bind(this);
     }
 
     jump() {
@@ -82,7 +84,7 @@ class Kakashi {
 
     slide() {
         if (this.sliding) {
-            if(this.slideCount === 0 || this.onGround()) {
+            if (this.slideCount === 0 || this.onGround()) {
                 this.position[1] = 230;
                 this.slideCount += 1
             } else {
@@ -96,13 +98,15 @@ class Kakashi {
     onGround() {
         return this.position[0] === 100 && this.position[1] >= 220;
     }
-    
+
     toggleJump() {
-        if (this.sliding !== true) {
-            this.jumping = true;
-        }
+        // if (this.sliding !== true) {
+        this.sliding = false;
+        this.slideAnimation = 0;
+        this.jumping = true;
+        // }
     }
-    
+
     toggleSlide() {
         if (this.jumping !== true) {
             this.sliding = true;
@@ -119,10 +123,10 @@ class Kakashi {
         } else if (this.gameOver && this.poseAnimaton === 20) {
             this.poseAnimation = 0;
             return POSESPRITE.pose1;
-        } else if(this.sliding && this.onGround() && this.slideAnimation < 50) {
+        } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
             this.slideAnimation += 1;
             return SLIDESPRITE.slide1;
-        }else if (this.slideAnimation >= 50) {
+        } else if (this.slideAnimation >= 50) {
             this.sliding = false;
             this.position[1] = 220;
             this.slideAnimation = 0;
@@ -187,9 +191,9 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation >= 54) {
             this.jumpAnimation = 0;
             return RUNSPRITE.run1;
-        // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
-        //     this.slideAnimation += 1;
-        //     return SLIDESPRITE.slide1;
+            // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
+            //     this.slideAnimation += 1;
+            //     return SLIDESPRITE.slide1;
         } else {
             this.slideAnimation = 0;
             return RUNSPRITE.run1;
@@ -220,32 +224,25 @@ class Kakashi {
 
     bounds() {
         return {
-            left: this.x,
-            right: this.x + CONSTANTS.KAKASHI_WIDTH,
-            top: this.y,
-            bottom: this.y + CONSTANTS.KAKASHI_HEIGHT
+            left: this.position[0],
+            right: this.position[0] + CONSTANTS.KAKASHI_WIDTH,
+            top: this.position[1],
+            bottom: this.position[1] + CONSTANTS.KAKASHI_HEIGHT
         };
-    }
-    
-    collidesWith(rock) {
-        let collision = false;
-        const _overlap = (rock) => {
-            if (rock.bounds().left > this.bounds().right || rock.bounds().right < this.bounds().left) {
-                return false;
-            }
-            if (rock.bounds().top < this.bounds().bottom || rock.bounds().bottom > this.bounds().top) {
-                return false;
-            }
-            return true;
-        };
-        // this.eachRock((rock) => {
-            if (_overlap(rock)) {
-                collision = true;
-                console.log("hit");
-            }
-        return collision;
     }
 
+    collidesWith(obstacle) {
+        let collision = false;
+        // const _overlap = (obstacle) => {
+        if (obstacle.position[0] + 50 > (this.position[0] + CONSTANTS.KAKASHI_WIDTH) || (obstacle.position[0] + 50) < this.position[0]) {
+            return false;
+        } else if
+            (obstacle.position[1] > (this.position[1] + CONSTANTS.KAKASHI_HEIGHT) || (obstacle.position[1] + 80) < this.position[1]) {
+            return false;
+        } else {
+            return true;
+        };
+    }
 }
 
 export default Kakashi;

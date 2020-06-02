@@ -2,24 +2,25 @@ import rocksSrc from "./images/rocks.png";
 
 const CONSTANTS = {
     SPEED: 5,
-    ROCK_WIDTH: 75,
-    ROCK_HEIGHT: 75
+    OBJECT_WIDTH: 75, //rock width
+    OBJECT_HEIGHT: 75 //rock height
 }
 
 const ROCK_SPRITES = {
-    rock1: [0,0,75,75],
-    rock2: [75,0,75,75],
-    rock3: [150,0,75,75]
+    rock1: [0, 0, 75, 75],
+    rock2: [75, 0, 75, 75],
+    rock3: [150, 0, 75, 75]
 }
 
 
 class Rock {
-    constructor() {
+    constructor(props) {
         this.rocks = new Image();
         this.rocks.src = rocksSrc;
-        this.num = Math.floor(Math.random() * 3) + 1
+        this.num = Math.floor(Math.random() * 3) + 1;
+        this.position = props.pos;
 
-
+        this.bounds.bind(this);
     }
 
     getRock() {
@@ -56,9 +57,9 @@ class Rock {
     bounds() {
         return {
             left: this.position[0],
-            right: this.position[0] + CONSTANTS.ROCK_WIDTH,
+            right: this.position[0] + CONSTANTS.OBJECT_WIDTH,
             top: this.position[1],
-            bottom: this.position[1] + CONSTANTS.ROCK_HEIGHT
+            bottom: this.position[1] + CONSTANTS.OBJECT_HEIGHT
         }
     }
 
