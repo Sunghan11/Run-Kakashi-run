@@ -14,9 +14,9 @@ class RunKakashiRun {
         this.ctx = ctx;
         this.gameCanvas = gameCanvas;
         this.kakashi = new Kakashi;
-        this.fireball = new Fireball;
-        this.fireball2 = new Fireball;
-        this.fireball3 = new Fireball;
+        // this.fireball = new Fireball;
+        // this.fireball2 = new Fireball;
+        // this.fireball3 = new Fireball;
         this.rock = new Rock;
         this.score = new Score(1);
         this.jump = this.jump.bind(this);
@@ -76,11 +76,11 @@ class RunKakashiRun {
 
     
     generateObstacles() {
-        while (this.obstacles.length < 2) {  
+        // while (this.obstacles.length < 4) {  
             this.createFireball();
             this.createRock();
             // this.obstacles.shift();
-        }
+        // }
         // this.createFireball(this.generateObstaclesSpacing())
     }
 
@@ -104,12 +104,17 @@ class RunKakashiRun {
         this.fireball.position = [900, 190];
         this.fireball2.position = [900, 100];
         this.fireball3.position = [900, 145];
+        if (this.fireball.position[0] === 0) {
+            this.fireball = null;
+            this.fireball = new Fireball();
+            this.fireball.position = [900, 190];
+        }
         // this.fireball.position = [1000, 190];
         // this.fireball2 = new Fireball(1000, 100);
         // this.fireballs.push(this.fireball);
         // this.fireballs.push(this.fireball2);
         this.obstacles.push('fireball')
-        if (this.fireball.position[0] < 0) {
+        if (this.fireball.position[0] < 500) {
             this.obstacles.shift();
         }
         
@@ -136,9 +141,15 @@ class RunKakashiRun {
     }
 
     gameOver() {
-        return (
-            this.background.collidesWith(this.kakashi)
-        )
+        this.kakashi.collidesWith(this.rock);
+        this.gameStop();
+    }
+
+    gameOverDraw() {
+        this.ctx.font = '48px serif';
+        this.strokeText('GAME OVER', 10, 50);
+        this.ctx.font = '38px serif';
+        this.strokeText("Press 'R' to run again")
     }
 
     start() {
@@ -150,6 +161,7 @@ class RunKakashiRun {
         // this.createFireball();
         this.createRock();
         this.generateObstacles();
+        this.canRestart = false;
      
         // this.fireball.position = [1000,190];
         // this.fireball2.position = [1000, 100];
@@ -159,9 +171,18 @@ class RunKakashiRun {
 
     gameStop() {
         this.gameOver = true;
+        this.gameOverDraw();
+        this.canRestart = true
     }
 
-    draw() {
+    restartGame(e) {
+        if (e.key === 'r' && this.canRestart) {
+            e.preventDefault();
+            this.start();
+        }
+    }
+
+     draw() {
         if (!this.gameOver) {
             requestAnimationFrame(this.draw);
             this.kakashi.update(this.ctx);
@@ -170,13 +191,30 @@ class RunKakashiRun {
             this.tree.draw();
             this.grass.draw();
             
+            
             this.fireball.update(this.ctx);
             this.fireball2.update(this.ctx);
             this.fireball3.update(this.ctx);
             this.rock.update(this.ctx);
-            if (this.obstacles.length < 2) {
-                this.generateObstacles()
+            let idx = null;
+            this.obstacles.forEach((obstacle, i => {
+                if (obstacle.outside() === true) {
+                    idx = i;
+                    console.log("outside")
+                }
+                if (this.kakashi.collidesWith(this.rock) === true) {
+                    console.log("hit")
+                }
+            }));
+            if (idx !== null) {
+                this.obstacles.splice(idx, 1);
             }
+
+            // if (this.kakashi.collidesWith(this.rock, this.fireball) ||
+            // this.kakashi.collidesWith(this.rock, this.fireball2 ||
+            //     this.kakashi.collidesWith(this.rock, this.fireball3))) {
+                //     this.gameStop();
+                // }
             // this.grass.drawRocks();
             // this.grass.moveRocks();
             // this.fireballs.forEach((fireball, idx) => {

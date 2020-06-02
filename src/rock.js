@@ -1,7 +1,9 @@
 import rocksSrc from "./images/rocks.png";
 
 const CONSTANTS = {
-    SPEED: 5
+    SPEED: 5,
+    ROCK_WIDTH: 75,
+    ROCK_HEIGHT: 75
 }
 
 const ROCK_SPRITES = {
@@ -51,8 +53,20 @@ class Rock {
         );
     }
 
+    bounds() {
+        return {
+            left: this.position[0],
+            right: this.position[0] + CONSTANTS.ROCK_WIDTH,
+            top: this.position[1],
+            bottom: this.position[1] + CONSTANTS.ROCK_HEIGHT
+        }
+    }
+
     move() {
         this.position[0] -= CONSTANTS.SPEED;
+        // if (this.position[0] === -20) {
+        //     this.position[0] = 900;
+        // }
     }
 
     update(ctx) {

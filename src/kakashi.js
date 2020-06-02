@@ -226,20 +226,20 @@ class Kakashi {
             bottom: this.y + CONSTANTS.KAKASHI_HEIGHT
         };
     }
-
-    collidesWith(rock, fireball) {
-        const _overlap = (obstacle, kakashi) => {
-            if (obstacle.left > kakashi.right || obstacle.right < kakashi.left) {
+    
+    collidesWith(rock) {
+        let collision = false;
+        const _overlap = (rock) => {
+            if (rock.bounds().left > this.bounds().right || rock.bounds().right < this.bounds().left) {
                 return false;
             }
-            if (obstacle.top < kakashi.bottom || obstacle.bottom > kakashi.top) {
+            if (rock.bounds().top < this.bounds().bottom || rock.bounds().bottom > this.bounds().top) {
                 return false;
             }
             return true;
         };
-        let collision = false;
         // this.eachRock((rock) => {
-            if (_overlap(rock, kakashi || _overlap(fireball, kakashi))) {
+            if (_overlap(rock)) {
                 collision = true;
                 console.log("hit");
             }

@@ -1,10 +1,16 @@
 .game-main {
-  position: relative;
-  width: vw;
-  height: vh;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   margin: 0 auto;
-  align-items: flex-end;
+  justify-content: center;
   
+}
+
+body {
+  height: 100vh;
+  background: grey;
 }
 
 
@@ -19,7 +25,7 @@
 
 #canvas {
   background: transparent;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   z-index: 10;
   top: 0;
   left: 0;
@@ -67,10 +73,10 @@
 .menu {
   position: relative;
   width: 750;
-  top: 5;
-  left: 5;
+  /* top: 5;
+  left: 5; */
   z-index: 15;
-  background:white;
+  /* background:white; */
   text-align: center;
   display: block;
 
@@ -97,7 +103,7 @@ span {
 
 .menu {
   position: relative;
-  width: 802px;
+  width: 800px;
 }
 
 #menu-canvas {
@@ -105,7 +111,12 @@ span {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  border: 1px solid red;
   /* align-items: center; */
+}
+
+game-over-canvas {
+  background-color: rgba(0, 0, 0, .5);
 }
 
 .kakashi {

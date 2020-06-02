@@ -5,6 +5,8 @@ const CONSTANTS = {
     SPEED: 7,
     WARM_UP_SECONDS: 5,
     EDGE_BUFFER: 50,
+    OBJECT_WIDTH: 70,
+    OBJECT_HEIGHT: 40
 }
 
 const FIRESPRITE = {
@@ -59,8 +61,14 @@ class Fireball {
         );
     }
 
+
+
     move() {
         this.position[0] -= CONSTANTS.SPEED;
+    }
+
+    outside() {
+        return this.position[0] < -100;
     }
 
     update(ctx) {
