@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   margin: 0 auto;
   justify-content: center;
   
@@ -68,7 +68,14 @@ body {
   /* font-size: 30px; */
 }
 
-
+.title {
+  font-size: 100px;
+  position: absolute;
+  background: black;
+  color: white;
+  width: 100vw;
+  text-align: center;
+}
 
 .menu {
   position: relative;
@@ -104,6 +111,7 @@ span {
 .menu {
   position: relative;
   width: 800px;
+  
 }
 
 #menu-canvas {
@@ -131,4 +139,24 @@ game-over-canvas {
 
 #play-button {
   color: white;
+}
+
+
+#links {
+  font-size: 20px;
+}
+
+#top {
+  display: flex;
+}
+
+#top-name {
+  color: black;
+  z-index: 10;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#links {
+  font-size: 40px;
 }

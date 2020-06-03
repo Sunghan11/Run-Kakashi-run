@@ -16,38 +16,61 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+        <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+        <script src="https://kit.fontawesome.com/75b747f87d.js" crossorigin="anonymous"></script>
+
 
     </head>
 
     <body>
         <main>
+            <div class="game-page">
+                <div id="top">
+                    <div id="top-name">
+                        Created by:
+                        
+                        Elijah Nam
+                    </div>
+                   
+              
+                </div>
+                <div class="title">
+                    RUN KAKASHI RUN
+                </div>
+                <div class="game-main">
+                    
+                    <div class="game-display">
+                        <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
+                        <canvas id="bg-canvas" height="300" width="800"></canvas>
+                        <canvas id="tree-canvas" height="300" width="800"></canvas>
+                        <canvas id="grass-canvas" height="300" width="800"></canvas>
 
-            <div class="game-main">
-                <div class="game-display">
-                    <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
-                    <canvas id="bg-canvas" height="300" width="800"></canvas>
-                    <canvas id="tree-canvas" height="300" width="800"></canvas>
-                    <canvas id="grass-canvas" height="300" width="800"></canvas>
+                        <section class="menu">
+                            <canvas id="menu-canvas" height="300" width="800"></canvas>
+                            <script src="./src/menuCanvas.js"></script>
+                            <div class="kakashi">
+                                <span>Run Kakashi Run</span>
+                                <p>How to Play</p>
+                                <p>Dodge Obstacles</p>
+                                <p>SPACE or UP to Jump</p>
+                                <p>CTRL or DOWN to Slide</p>
 
-                    <section class="menu">
-                        <canvas id="menu-canvas" height="300" width="800"></canvas>
-                        <script src="./src/menuCanvas.js"></script>
-                        <div class="kakashi">
-                            <span>Run Kakashi Run</span>
-                            <p>How to Play</p>
-                            <p>Dodge Obstacles</p>
-                            <p>SPACE or UP to Jump</p>
-                            <p>CTRL or DOWN to Slide</p>
+                                <nav class="gameplay-nav group">
+                                    <button id="play-button">PLAY</button>
+                                </nav>
+                            </div>
+                        </section>
+                        <section class="game-over">
+                            <canvas id="game-over-canvas" height="300" width="800"></canvas>
+                            <script src="./src/menuCanvas.js"></script>
+                        </section>
+                    </div>
+                </div>
+                <div id="links">
+                    <a href="https://github.com/Sunghan11"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/elijah-nam-6a412b25/"><i class="fab fa-linkedin"></i></a>
 
-                            <nav class="gameplay-nav group">
-                                <button id="play-button">PLAY</button>
-                            </nav>
-                        </div>
-                    </section>
-                    <section class="game-over">
-                        <canvas id="game-over-canvas" height="300" width="800"></canvas>
-                        <script src="./src/menuCanvas.js"></script>
-                    </section>
                 </div>
             </div>
         </main>

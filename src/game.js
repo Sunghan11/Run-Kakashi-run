@@ -26,6 +26,7 @@ class RunKakashiRun {
         this.addListeners();
         this.restartGame = this.restartGame.bind(this);
         this.start = this.start.bind(this);
+        this.jumpCount = 0;
         // this.obstacles = [];
         // this.fireballsArr = [];
         // this.rocksArr = [];
@@ -47,9 +48,14 @@ class RunKakashiRun {
     jump(event) {
         if ((event.code === 'Space' || event.code === 'KeyW' || event.code === 'ArrowUp') && this.gamePlaying) {
             event.preventDefault();
-            if (!this.gameOver) {
+            if (!this.gameOver && this.jumpCount < 2) {
+                // this.jumpCount ++;
                 this.kakashi.toggleJump();
-            }
+            // } else if (!this.gameOver && this.jumpCount === 1) {
+            //     this.kakashi.toggleJump();
+            //     this.jumpCount += 1;
+            } 
+            // this.jumpCount = 0;
         }
     }
 
@@ -141,7 +147,7 @@ class RunKakashiRun {
         this.fireballsArr = [];
         this.fireballs = 0;
         this.rocks = 0;
-        this.maxObstacles = 3;
+        this.maxObstacles = 4;
         this.spawnTime = 70;
         this.spawnCount = 0;
         this.fireballSpawnCount = 0;
