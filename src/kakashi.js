@@ -1,8 +1,8 @@
 import kakashi2Src from "./images/kakashi2.png"
 
 const CONSTANTS = {
-    GRAVITY: 0.4,
-    VELOCITY: 11,
+    GRAVITY: 0.2,
+    VELOCITY: 5.5,
     KAKASHI_WIDTH: 55,
     KAKASHI_HEIGHT: 55,
 }
@@ -70,9 +70,9 @@ class Kakashi {
             // if (this.velocity === 0 && this.countJump === 1 || !this.onGround() && this.countJump === 1) {
             if (this.velocity === 0 || !this.onGround()) {
                 
-                // console.log("first Jump");
+                console.log("first Jump");
                 this.position[1] -= CONSTANTS.VELOCITY - CONSTANTS.GRAVITY * this.velocity;
-                this.velocity ++;
+                this.velocity += 0.5;
                 // this.jumping = false;
             // } else if ((this.velocity <= 60 && this.countJump === 2 && this.velocity <= 100) && !this.onGround()) {
             //     let newVel = 0;
@@ -87,11 +87,6 @@ class Kakashi {
             //     this.velocity = 0;
             //     this.countJump = 0;
                 // this.countJump ++;
-
-            // } else if (this.jumpCount < 55 && !this.onGround()) {
-            //     this.position[1] -= CONSTANTS.VELOCITY - CONSTANTS.GRAVITY * this.jumpCount;
-            //     this.jumpCount ++;
-            //     // }
             } else {
                 this.position[1] = 220;
                 this.velocity = 0;
@@ -128,13 +123,13 @@ class Kakashi {
     }
 
     toggleJump() {
-        // if (this.countJump < 3) {
         this.sliding = false;
-        // this.jumpAnimation = 0;
         this.slideAnimation = 0;
-        this.jumping = true;
-        // this.countJump += 1;
-        // }
+        if (this.countJump < 3) {
+            this.jumping = true;
+            console.log("jump Event");
+            this.countJump += 1;
+        }
     }
 
     toggleSlide() {
@@ -144,82 +139,84 @@ class Kakashi {
     }
 
     getFrame() {
-        if (this.gameOver && this.poseAnimation < 10) {
+        if (this.gameOver && this.poseAnimation < 20) {
             this.poseAnimate += 1;
             return POSESPRITE.pose1;
-        } else if (this.gameOver && this.poseAnimation < 20) {
+        } else if (this.gameOver && this.poseAnimation < 40) {
             this.poseAnimation += 1;
             return POSESPRITE.pose2;
-        } else if (this.gameOver && this.poseAnimaton === 20) {
+        } else if (this.gameOver && this.poseAnimaton === 40) {
             this.poseAnimation = 0;
             return POSESPRITE.pose1;
-        } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
+        } else if (this.sliding && this.onGround() && this.slideAnimation < 100) {
             this.slideAnimation += 1;
             this.jumpAnimation = 0;
             return SLIDESPRITE.slide1;
-        } else if (this.slideAnimation >= 50) {
+        } else if (this.slideAnimation >= 100) {
             this.sliding = false;
             this.position[1] = 220;
             this.slideAnimation = 0;
             return RUNSPRITE.run1;
-        } else if (this.onGround() && this.runAnimation < 5) {
+        } else if (this.onGround() && this.runAnimation < 10) {
+            this.jumpAnimation = 0;
+            this.slideAnimation = 0;
             this.runAnimation += 1;
             return RUNSPRITE.run1;
-        } else if (this.onGround() && this.runAnimation < 10) {
-            this.runAnimation += 1;
-            return RUNSPRITE.run2;
-        } else if (this.onGround() && this.runAnimation < 15) {
-            this.runAnimation += 1;
-            return RUNSPRITE.run3;
         } else if (this.onGround() && this.runAnimation < 20) {
             this.runAnimation += 1;
-            return RUNSPRITE.run4;
-        } else if (this.onGround() && this.runAnimation < 25) {
-            this.runAnimation += 1;
-            return RUNSPRITE.run5;
+            return RUNSPRITE.run2;
         } else if (this.onGround() && this.runAnimation < 30) {
             this.runAnimation += 1;
+            return RUNSPRITE.run3;
+        } else if (this.onGround() && this.runAnimation < 40) {
+            this.runAnimation += 1;
+            return RUNSPRITE.run4;
+        } else if (this.onGround() && this.runAnimation < 50) {
+            this.runAnimation += 1;
+            return RUNSPRITE.run5;
+        } else if (this.onGround() && this.runAnimation < 60) {
+            this.runAnimation += 1;
             return RUNSPRITE.run6;
-        } else if (this.onGround() && this.runAnimation >= 30) {
+        } else if (this.onGround() && this.runAnimation >= 60) {
             this.runAnimation = 0;
             return RUNSPRITE.run1;
-        } else if (!this.onGround() && this.jumpAnimation < 4) {
-            this.jumpAnimation += 1;
-            return JUMPSPRITE.jump1;
         } else if (!this.onGround() && this.jumpAnimation < 8) {
             this.jumpAnimation += 1;
-            return JUMPSPRITE.jump2;
-        } else if (!this.onGround() && this.jumpAnimation < 12) {
-            this.jumpAnimation += 1;
-            return JUMPSPRITE.jump3;
+            return JUMPSPRITE.jump1;
         } else if (!this.onGround() && this.jumpAnimation < 16) {
             this.jumpAnimation += 1;
-            return JUMPSPRITE.jump4;
-        } else if (!this.onGround() && this.jumpAnimation < 20) {
-            this.jumpAnimation += 1;
-            return JUMPSPRITE.jump5;
+            return JUMPSPRITE.jump2;
         } else if (!this.onGround() && this.jumpAnimation < 24) {
             this.jumpAnimation += 1;
+            return JUMPSPRITE.jump3;
+        } else if (!this.onGround() && this.jumpAnimation < 32) {
+            this.jumpAnimation += 1;
+            return JUMPSPRITE.jump4;
+        } else if (!this.onGround() && this.jumpAnimation < 40) {
+            this.jumpAnimation += 1;
+            return JUMPSPRITE.jump5;
+        } else if (!this.onGround() && this.jumpAnimation < 48) {
+            this.jumpAnimation += 1;
             return JUMPSPRITE.jump6;
-        } else if (!this.onGround() && this.jumpAnimation < 30) {
+        } else if (!this.onGround() && this.jumpAnimation < 60) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump7;
-        } else if (!this.onGround() && this.jumpAnimation < 36) {
+        } else if (!this.onGround() && this.jumpAnimation < 72) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump8;
             // } else if (!this.onGround() && this.jumpAnimation < 42) {
             //     this.jumpAnimation += 1;
             //     return JUMPSPRITE.jump9;
-        } else if (!this.onGround() && this.jumpAnimation < 46) {
+        } else if (!this.onGround() && this.jumpAnimation < 92) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump10;
-        } else if (!this.onGround() && this.jumpAnimation < 50) {
+        } else if (!this.onGround() && this.jumpAnimation < 100) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump11;
-        } else if (!this.onGround() && this.jumpAnimation < 54) {
+        } else if (!this.onGround() && this.jumpAnimation < 108) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump12;
-        } else if (!this.onGround() && this.jumpAnimation >= 54) {
+        } else if (!this.onGround() && this.jumpAnimation >= 108) {
             this.jumpAnimation = 0;
             return RUNSPRITE.run1;
             // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {

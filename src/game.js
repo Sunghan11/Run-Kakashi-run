@@ -84,7 +84,7 @@ class RunKakashiRun {
     createBackground(bgCtx, treeCtx, grassCtx) {
         const bgImage = new Image();
         bgImage.src = backgroundWaterSrc;
-        this.bg = new Background(bgCtx, bgImage, -35, 1400, .5);
+        this.bg = new Background(bgCtx, bgImage, -35, 1400, 0.5);
 
         const treeImage = new Image();
         treeImage.src = darkTreesSrc;
@@ -111,7 +111,7 @@ class RunKakashiRun {
             let fb3 = new Fireball({ pos: [900, 145] });
             this.fireballsArr.push([fb1, fb3]);
             this.fireballSpawnCount++;
-        } else if (this.fireballSpawnCount === 200) {
+        } else if (this.fireballSpawnCount === 350) {
             this.fireballSpawnCount = 0;
         } else {
             this.fireballSpawnCount++;
@@ -127,7 +127,7 @@ class RunKakashiRun {
             console.log("spawn");
             // this.rocks += 1;
             this.spawnCount++;
-        } else if (this.spawnCount === 150) {
+        } else if (this.spawnCount === 280) {
             // this.rocksArr = [];
             this.spawnCount = 0;
         } else {
