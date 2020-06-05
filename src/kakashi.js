@@ -69,6 +69,7 @@ class Kakashi {
         if (this.jumping) {
             // if (this.velocity === 0 && this.countJump === 1 || !this.onGround() && this.countJump === 1) {
             if (this.velocity === 0 || !this.onGround()) {
+                
                 // console.log("first Jump");
                 this.position[1] -= CONSTANTS.VELOCITY - CONSTANTS.GRAVITY * this.velocity;
                 this.velocity ++;
@@ -129,6 +130,7 @@ class Kakashi {
     toggleJump() {
         // if (this.countJump < 3) {
         this.sliding = false;
+        // this.jumpAnimation = 0;
         this.slideAnimation = 0;
         this.jumping = true;
         // this.countJump += 1;
@@ -153,6 +155,7 @@ class Kakashi {
             return POSESPRITE.pose1;
         } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
             this.slideAnimation += 1;
+            this.jumpAnimation = 0;
             return SLIDESPRITE.slide1;
         } else if (this.slideAnimation >= 50) {
             this.sliding = false;
@@ -224,6 +227,7 @@ class Kakashi {
             //     return SLIDESPRITE.slide1;
         } else {
             this.slideAnimation = 0;
+            this.jumpAnimation = 0
             return RUNSPRITE.run1;
         }
     }
