@@ -2,7 +2,7 @@ import { collision } from './collision';
 import fireballSrc from "./images/fireball.png";
 
 const CONSTANTS = {
-    SPEED: 9,
+    SPEED: 5,
     WARM_UP_SECONDS: 5,
     EDGE_BUFFER: 50,
     OBJECT_WIDTH: 70, //fireball width

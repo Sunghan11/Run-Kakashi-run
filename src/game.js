@@ -84,15 +84,15 @@ class RunKakashiRun {
     createBackground(bgCtx, treeCtx, grassCtx) {
         const bgImage = new Image();
         bgImage.src = backgroundWaterSrc;
-        this.bg = new Background(bgCtx, bgImage, -35, 1400, 1);
+        this.bg = new Background(bgCtx, bgImage, -35, 1400, .5);
 
         const treeImage = new Image();
         treeImage.src = darkTreesSrc;
-        this.tree = new Background(treeCtx, treeImage, 115, 400, 3);
+        this.tree = new Background(treeCtx, treeImage, 115, 400, 1.5);
 
         const grassImage = new Image();
         grassImage.src = grassSrc;
-        this.grass = new Background(grassCtx, grassImage, 263, 400, 5);
+        this.grass = new Background(grassCtx, grassImage, 263, 400, 2.5);
     }
 
     generateObstaclesSpacing() {
@@ -107,9 +107,9 @@ class RunKakashiRun {
     createFireballs() {
         if (this.fireballsArr.length < this.maxObstacles && this.fireballSpawnCount === 0) {
             let fb1 = new Fireball({ pos: [900, 190] });
-            let fb2 = new Fireball({ pos: [900, 100] });
+            // let fb2 = new Fireball({ pos: [900, 100] });
             let fb3 = new Fireball({ pos: [900, 145] });
-            this.fireballsArr.push([fb1, fb2, fb3]);
+            this.fireballsArr.push([fb1, fb3]);
             this.fireballSpawnCount++;
         } else if (this.fireballSpawnCount === 200) {
             this.fireballSpawnCount = 0;
@@ -185,7 +185,9 @@ class RunKakashiRun {
 
     restartGame(event) {
         if (event.code === 'KeyR') {
+            cancelAnimationFrame(this.requestId);
             event.preventDefault();
+            
             // if (this.canRestart ) {
             //     console.log("r pressed")
             this.start();
@@ -195,7 +197,8 @@ class RunKakashiRun {
 
     draw() {
         if (!this.gameOver) {
-            requestAnimationFrame(this.draw);
+            this.requestId = requestAnimationFrame(this.draw.bind(this));
+            
             this.kakashi.update(this.ctx);
             this.score.drawScore(this.ctx);
             this.bg.draw();
@@ -233,17 +236,17 @@ class RunKakashiRun {
             this.fireballsArr.forEach((fireball, i) => {
                 fireball[0].update(this.ctx);
                 fireball[1].update(this.ctx);
-                fireball[2].update(this.ctx);
+                // fireball[2].update(this.ctx);
                 if (fireball[0].position[0] < -300) {
                     fireIdx = i;
                     // console.log("fireball spawned");
                 }
-                if (this.kakashi.collidesWith(fireball[2])) {
-                    this.gameStop();
-                }
                 if (this.kakashi.collidesWith(fireball[1])) {
                     this.gameStop();
                 }
+                // if (this.kakashi.collidesWith(fireball[1])) {
+                //     this.gameStop();
+                // }
             });
             if (fireIdx !== null) {
                 // console.log("fireball removed")

@@ -144,13 +144,13 @@ console.log(circleArray)
 
 // }
 
-function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// function animate() {
+//     this.requestId = requestAnimationFrame(this.animate.bind(this));
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (var i = 0; i < circleArray.length; i++) {
-        circleArray[i].update();
-    }
-}
+//     for (var i = 0; i < circleArray.length; i++) {
+//         circleArray[i].update();
+//     }
+// }
 
 animate();

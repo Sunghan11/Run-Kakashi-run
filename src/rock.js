@@ -1,7 +1,7 @@
 import rocksSrc from "./images/rocks.png";
 
 const CONSTANTS = {
-    SPEED: 5,
+    SPEED: 2.5,
     OBJECT_WIDTH: 75, //rock width
     OBJECT_HEIGHT: 75 //rock height
 }
