@@ -6,15 +6,15 @@ Run Kakashi Run is an iteration of one of the most famous games that have ever b
 
 Here is a footage of gameplay.
 
-![] (RunKakashiGif.gif)
+![Run Kakashi Run Gameplay Demo](RunKakashiGif.gif)
 
 ## 2. Functionality and MVPS
 
 Users will be able to:
 
 * Start a game where-in a randomized environment will be setup.
-* Be able to select the background theme they would like to run in.
-* Milestones to unlock different skins/characters.
+* Rocks and fireballs will spawn automatically in random intervals.
+* Player will be able to either jump to dodge rocks or jump/slide to dodge fireballs.
 
 ## 3. Wireframes
 
