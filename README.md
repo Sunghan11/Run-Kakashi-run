@@ -4,7 +4,9 @@
 
 Run Kakashi Run is an iteration of one of the most famous games that have ever been made. Side Scrollers. Players will be running across land and will have to dodge obstacles and survive as long as they can. There will be unmoving and moving objects that will appear along your path, and your goal is to run as far as you can.
 
-The game begins at a lower speed, and after reaching certain distance checkpoints, the speed will increase and difficulty will increase.
+Here is a footage of gameplay.
+
+![] (RunKakashiGif,gif)
 
 ## 2. Functionality and MVPS
 
