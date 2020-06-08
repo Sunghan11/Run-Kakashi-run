@@ -14,10 +14,6 @@ class RunKakashiRun {
         this.ctx = ctx;
         this.gameCanvas = gameCanvas;
         this.kakashi = new Kakashi({ pos: [100, 220] });
-        // this.fireball = new Fireball;
-        // this.fireball2 = new Fireball;
-        // this.fireball3 = new Fireball;
-        // this.rock = new Rock;
         this.score = new Score(1);
         this.jump = this.jump.bind(this);
         this.slide = this.slide.bind(this);
@@ -27,16 +23,7 @@ class RunKakashiRun {
         this.restartGame = this.restartGame.bind(this);
         this.start = this.start.bind(this);
         this.jumpCount = 0;
-        // this.obstacles = [];
-        // this.fireballsArr = [];
-        // this.rocksArr = [];
-        // this.fireballs = 0;
-        // this.rocks = 0;
-        // this.maxObstacles = 3;
-        // this.spawnTime = 70;
-        // this.spawnCount = 0;
-        // this.fireballSpawnCount = 0;
-        // this.fireballSpawnTime = 140;
+     
 
 
 
@@ -152,7 +139,6 @@ class RunKakashiRun {
         this.spawnCount = 0;
         this.fireballSpawnCount = 0;
         this.fireballSpawnTime = 140;
-        // document.getElementById('game-over-canvas');
 
         this.draw();
     }
@@ -207,28 +193,17 @@ class RunKakashiRun {
             this.createRocks();
             this.createFireballs();
 
-
-            // this.fireball.update(this.ctx);
-            // this.fireball2.update(this.ctx);
-            // this.fireball3.update(this.ctx);
-            // this.rock.update(this.ctx);
             let idx = null;
             this.rocksArr.forEach((rock, i) => {
                 rock.update(this.ctx);
-                // console.log(this.kakashi.position[0]);
-                // console.log(rock.position[0]);
                 if (rock.position[0] < -300) {
-                    // this.rocksArr.splice(0, 1);
                     idx = i;
-                    // console.log("rock spawned");
                 }
                 if (this.kakashi.collidesWith(rock) === true) {
-                    // console.log("hit")
                     this.gameStop();
                 }
             });
             if (idx !== null) {
-                // console.log("rock removed")
                 this.rocksArr.splice(idx, 1);
             }
 
@@ -244,9 +219,7 @@ class RunKakashiRun {
                 if (this.kakashi.collidesWith(fireball[1])) {
                     this.gameStop();
                 }
-                // if (this.kakashi.collidesWith(fireball[1])) {
-                //     this.gameStop();
-                // }
+
             });
             if (fireIdx !== null) {
                 // console.log("fireball removed")

@@ -47,8 +47,6 @@ class Rock {
             sprite[3], //sHeight
             this.position[0], //dx
             this.position[1], //dy
-            // this.x,
-            // this.y,
             sprite[2], //dWidth
             sprite[3] //dHeight
         );

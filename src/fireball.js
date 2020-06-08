@@ -45,9 +45,6 @@ class Fireball {
 
     draw(ctx) {
         ctx.beginPath();
-
-        console.log('fireballl');
-        // ctx.clearRect(0, 0, 800, 300);
         const sprite = this.getFrame();
         ctx.drawImage(
             this.fireSprites, //image

@@ -93,15 +93,6 @@ class Kakashi {
                 this.jumping = false;
                 this.countJump = 0;
             }
-        // }else if  (this.jumping && this.countJump < 2){
-        //     if (this.velocity < 55 && !this.onGround()) {
-        //         this.position[1] -= CONSTANTS.VELOCITY - CONSTANTS.GRAVITY * this.velocity;
-        //         this.velocity ++;
-        //     } else {
-        //         this.position[1] = 220;
-        //         this.velocity = 0;
-        //         this.jumping = false;
-        //     }
         }
     }
 
@@ -204,9 +195,6 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation < 72) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump8;
-            // } else if (!this.onGround() && this.jumpAnimation < 42) {
-            //     this.jumpAnimation += 1;
-            //     return JUMPSPRITE.jump9;
         } else if (!this.onGround() && this.jumpAnimation < 92) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump10;
@@ -219,9 +207,6 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation >= 108) {
             this.jumpAnimation = 0;
             return RUNSPRITE.run1;
-            // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
-            //     this.slideAnimation += 1;
-            //     return SLIDESPRITE.slide1;
         } else {
             this.slideAnimation = 0;
             this.jumpAnimation = 0
