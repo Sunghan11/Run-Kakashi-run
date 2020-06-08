@@ -6,7 +6,7 @@ Run Kakashi Run is an iteration of one of the most famous games that have ever b
 
 Here is a footage of gameplay.
 
-![] (RunKakashiGif,gif)
+![] (RunKakashiGif.gif)
 
 ## 2. Functionality and MVPS
 
