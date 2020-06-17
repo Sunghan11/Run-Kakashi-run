@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 85vh;
+  height: 75vh;
   margin: 0 auto;
   justify-content: center;
   
@@ -46,6 +46,11 @@ body {
   z-index: 5;
 }
 
+#directions {
+  text-shadow: 1px 1px 1px red;
+  font-size: 20px;
+}
+
 #grass-canvas {
   top: 0;
   left: 0;
@@ -55,7 +60,7 @@ body {
 
 #play-button {
   position: relative;
-  top: 70px;
+  top: 45px;
   font-family: 'Open Sans', sans-serif;
   font-size: 40px;
   color: black;
@@ -97,6 +102,7 @@ span {
   color: white;
   /* text-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);  */
   text-shadow: 1px 0 10px red;
+  padding-bottom: 10px;
 }
 
 
@@ -130,7 +136,7 @@ game-over-canvas {
 .kakashi {
   color: white;
   position: absolute;
-  top: 50px;
+  top: 30px;
   left: 200px;
   align-content: center;
   margin: auto 0;
@@ -144,6 +150,11 @@ game-over-canvas {
 
 #links {
   font-size: 20px;
+  margin-left: 20px;
+}
+
+body {
+  overflow:hidden;
 }
 
 #top {
@@ -151,10 +162,14 @@ game-over-canvas {
 }
 
 #top-name {
-  color: black;
+  /* color: rgb(0, 174, 255); */
+  color: white;
   z-index: 10;
   font-weight: bold;
   font-size: 20px;
+  text-shadow: 1px 1px 1px black;
+  line-height: 60px;
+  margin-left: 20px;
 }
 
 #links {

@@ -93,15 +93,6 @@ class Kakashi {
                 this.jumping = false;
                 this.countJump = 0;
             }
-        // }else if  (this.jumping && this.countJump < 2){
-        //     if (this.velocity < 55 && !this.onGround()) {
-        //         this.position[1] -= CONSTANTS.VELOCITY - CONSTANTS.GRAVITY * this.velocity;
-        //         this.velocity ++;
-        //     } else {
-        //         this.position[1] = 220;
-        //         this.velocity = 0;
-        //         this.jumping = false;
-        //     }
         }
     }
 
@@ -123,13 +114,19 @@ class Kakashi {
     }
 
     toggleJump() {
-        this.sliding = false;
-        this.slideAnimation = 0;
-        if (this.countJump < 3) {
+        if (!this.jumping) {
+            this.sliding = false;
+            this.position[1] = 215;
             this.jumping = true;
-            console.log("jump Event");
-            this.countJump += 1;
         }
+
+        // if (!this.jumping || this.countJump < 3) {
+        //     this.sliding = false;
+        //     this.position[1] = this.position[1];
+            
+        //     this.jumping = true;
+        //     this.countJump += 1
+        // }
     }
 
     toggleSlide() {
@@ -180,7 +177,7 @@ class Kakashi {
         } else if (this.onGround() && this.runAnimation >= 60) {
             this.runAnimation = 0;
             return RUNSPRITE.run1;
-        } else if (!this.onGround() && this.jumpAnimation < 8) {
+        } else if (this.jumping && this.jumpAnimation < 8) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump1;
         } else if (!this.onGround() && this.jumpAnimation < 16) {
@@ -204,9 +201,6 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation < 72) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump8;
-            // } else if (!this.onGround() && this.jumpAnimation < 42) {
-            //     this.jumpAnimation += 1;
-            //     return JUMPSPRITE.jump9;
         } else if (!this.onGround() && this.jumpAnimation < 92) {
             this.jumpAnimation += 1;
             return JUMPSPRITE.jump10;
@@ -219,9 +213,6 @@ class Kakashi {
         } else if (!this.onGround() && this.jumpAnimation >= 108) {
             this.jumpAnimation = 0;
             return RUNSPRITE.run1;
-            // } else if (this.sliding && this.onGround() && this.slideAnimation < 50) {
-            //     this.slideAnimation += 1;
-            //     return SLIDESPRITE.slide1;
         } else {
             this.slideAnimation = 0;
             this.jumpAnimation = 0
@@ -263,10 +254,10 @@ class Kakashi {
     collidesWith(obstacle) {
         let collision = false;
         // const _overlap = (obstacle) => {
-        if (obstacle.position[0] + 50 > (this.position[0] + CONSTANTS.KAKASHI_WIDTH) || (obstacle.position[0] + 40) < this.position[0]) {
+        if (obstacle.position[0] + 50 > (this.position[0] + CONSTANTS.KAKASHI_WIDTH - 20) || (obstacle.position[0] + 40) < this.position[0]) {
             return false;
         } else if
-            (obstacle.position[1] > (this.position[1] + CONSTANTS.KAKASHI_HEIGHT) || (obstacle.position[1] + 82) < this.position[1]) {
+            (obstacle.position[1] > (this.position[1] + CONSTANTS.KAKASHI_HEIGHT - 20) || (obstacle.position[1] + 82) < this.position[1]) {
             return false;
         } else {
             return true;
