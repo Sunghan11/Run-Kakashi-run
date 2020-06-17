@@ -35,7 +35,7 @@ class RunKakashiRun {
     jump(event) {
         if ((event.code === 'Space' || event.code === 'KeyW' || event.code === 'ArrowUp') && this.gamePlaying) {
             event.preventDefault();
-            if (!this.gameOver && this.jumpCount < 2) {
+            if (!this.gameOver) {
                 // this.jumpCount ++;
                 this.kakashi.toggleJump();
             // } else if (!this.gameOver && this.jumpCount === 1) {
