@@ -44,36 +44,37 @@
                 <div class="game-main">
                     <div class="main-background">
                     <!-- </div> -->
-                    
-                        <div class="game-display">
-                            <!-- <canvas id="arcade-machine" height="900" width="800" tabindex="5"></canvas> -->
-                            <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
-                            <canvas id="bg-canvas" height="300" width="800"></canvas>
-                            <canvas id="tree-canvas" height="300" width="800"></canvas>
-                            <canvas id="grass-canvas" height="300" width="800"></canvas>
+                        <div class="arcade-machine">
+                            <div class="game-display">
+                                <!-- <canvas id="arcade-machine" height="900" width="800" tabindex="5"></canvas> -->
+                                <canvas id="canvas" height="300" width="800" tabindex="1"></canvas>
+                                <canvas id="bg-canvas" height="300" width="800"></canvas>
+                                <canvas id="tree-canvas" height="300" width="800"></canvas>
+                                <canvas id="grass-canvas" height="300" width="800"></canvas>
 
-                            <section class="menu">
-                                <canvas id="menu-canvas" height="300" width="800"></canvas>
-                                <script src="./src/menuCanvas.js"></script>
-                                <div class="kakashi">
-                                    <span>Run Kakashi Run</span>
-                                    <div id="directions"> 
-                                        <p>HOW TO PLAY</p>
-                                        <p>Dodge Obstacles</p>
+                                <section class="menu">
+                                    <canvas id="menu-canvas" height="300" width="800"></canvas>
+                                    <script src="./src/menuCanvas.js"></script>
+                                    <div class="kakashi">
+                                        <span>Run Kakashi Run</span>
+                                        <div id="directions"> 
+                                            <p>HOW TO PLAY</p>
+                                            <p>Dodge Obstacles</p>
+                                        </div>
+                                        </br>
+                                        <p><u>SPACE</u> or <u>UP</u> to Jump</p>
+                                        <p><u>CTRL</u> or <u>DOWN</u> to Slide</p>
+
+                                        <nav class="gameplay-nav group">
+                                            <button id="play-button">PLAY</button>
+                                        </nav>
                                     </div>
-                                    </br>
-                                    <p><u>SPACE</u> or <u>UP</u> to Jump</p>
-                                    <p><u>CTRL</u> or <u>DOWN</u> to Slide</p>
-
-                                    <nav class="gameplay-nav group">
-                                        <button id="play-button">PLAY</button>
-                                    </nav>
-                                </div>
-                            </section>
-                            <section class="game-over">
-                                <canvas id="game-over-canvas" height="300" width="800"></canvas>
-                                <script src="./src/menuCanvas.js"></script>
-                            </section>
+                                </section>
+                                <section class="game-over">
+                                    <canvas id="game-over-canvas" height="300" width="800"></canvas>
+                                    <script src="./src/menuCanvas.js"></script>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>
