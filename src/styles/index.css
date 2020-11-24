@@ -2,25 +2,62 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 75vh;
+  height: 90vh;
   margin: 0 auto;
   justify-content: center;
   
 }
 
+/* .main-background {
+  background-image: url("../../dist/images/Kakashiarcade.png");
+  background-repeat: no-repeat;
+  background-size: 930px 800px;
+  background-position-x: center;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  justify-content: center;
+
+} */
+
 body {
   height: 100vh;
   background: grey;
+
 }
 
-
+.arcade-machine {
+    background-image: url("../../dist/images/Kakashiarcade.png");
+  background-repeat: no-repeat;
+  background-size: 930px 800px;
+  background-position-x: center;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  
+  position: absolute;
+  top: 5%;
+}
 .game-display {
+  /* background-image: url("../../dist/images/Kakashiarcade.png");
+  background-repeat: no-repeat;
+  background-size: 930px 800px;
+  background-position-x: center;
+  height: 300px;
+  width: 800px; */
   height: 300px;
   width: 800px;
   position: relative;
   display: inline-block;
   margin: 0 auto;
+  top: 145px;
   align-items: center;
+  border: 10px solid grey;
+  border-radius: 10px;
+  /* text-align: center; */
 }
 
 #canvas {
@@ -149,6 +186,8 @@ game-over-canvas {
 
 
 #links {
+  position: fixed;
+  bottom: 0;
   font-size: 20px;
   margin-left: 20px;
 }
